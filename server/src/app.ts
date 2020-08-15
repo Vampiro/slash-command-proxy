@@ -15,4 +15,4 @@ router.get("/hello", (ctx, next) => {
 app.use(KoaStatic(reactBuildDir));
 app.use(router.middleware());
 
-app.listen(3001);
+app.listen(process.env.PORT || 80);

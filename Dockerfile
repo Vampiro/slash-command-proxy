@@ -19,6 +19,6 @@ COPY --from=build /app/server/build /app/server/build
 COPY --from=build /app/server/node_modules /app/server/node_modules
 COPY --from=build /app/server/package*.json /app/server/
 COPY --from=build /app/client/build /app/client/build
-EXPOSE 3001
+EXPOSE 80
 WORKDIR /app/server
 CMD ["npm", "start"]
