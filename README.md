@@ -11,7 +11,7 @@ When you create a MSC, you must fill out a number of fields. Among them are:
 - Request URL
 - Command Trigger Word
 
-The MSC will then send off an HTTP request to the Request URL. It will tack on additional parameters in the request (command: `/test hi there`):
+When you run a custom MSC, Mattermost will send off an HTTP request to the Request URL. It will tack on additional parameters in the request (command: `/test hi there`):
 
 ```js
 {
