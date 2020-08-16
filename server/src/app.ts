@@ -10,7 +10,7 @@ router.get("/hello", (ctx, next) => {
   ctx.body = "Hello World";
   ctx.status = 200;
   console.log("ctx=", ctx);
-  console.log("params", ctx.query);
+  console.log("params=", ctx.query);
   return;
 });
 
