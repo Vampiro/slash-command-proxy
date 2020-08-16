@@ -11,13 +11,13 @@ test("formulate output", () => {
   );
 });
 
-test("get keywords from template", () => {
-  const keywords = Utils.getKeywords(
-    "Hello ((mm.user_name)). You rolled AAprxr.rAA a ((prxa.20)) and a ((prxa.abc123))."
+test("get keyword map from template", () => {
+  const keywordMap = Utils.getKeywordMap(
+    "Hello ((mm.user_name)). You rolled AAprxr.rAA a ((prxa.20)) and a ((prxa.abc123)) ((prxr.rawr))."
   );
 
-  expect(keywords.length).toBe(3);
-  expect(keywords).toContain("mm.user_name");
-  expect(keywords).toContain("prxa.20");
-  expect(keywords).toContain("prxa.abc123");
+  expect(keywordMap.size).toBe(3);
+  expect(keywordMap.get("prxa")).toEqual(expect.arrayContaining(["abc123"]));
+  expect(keywordMap.get("prxr")).toEqual(expect.arrayContaining(["rawr"]));
+  expect(keywordMap.get("mm")).toEqual(expect.arrayContaining(["user_name"]));
 });
