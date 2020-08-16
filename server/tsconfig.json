@@ -1,11 +1,11 @@
 {
-  "version": "2.0.2",
   "compilerOptions": {
-    "outDir": "./build",
     "lib": ["es5", "es6"],
-    "target": "es6",
     "module": "commonjs",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "outDir": "./build",
+    "target": "es6"
   },
+  "exclude": ["src/**/*.test.ts"],
   "include": ["./src/**/*"]
 }
