@@ -24,7 +24,3 @@ export function getKeywords(outputTemplate: string): string[] {
 
   return keywords;
 }
-
-getKeywords(
-  "Hello ((mm.user_name)). You rolled AAprxr.rAA a ((prxr.result)) and a AAprxr.rAA ((prxr.alsoresult))."
-);

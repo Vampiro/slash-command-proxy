@@ -13,11 +13,11 @@ test("formulate output", () => {
 
 test("get keywords from template", () => {
   const keywords = Utils.getKeywords(
-    "Hello ((mm.user_name)). You rolled AAprxr.rAA a ((prxa.20)) and a ((prxr.abc123))."
+    "Hello ((mm.user_name)). You rolled AAprxr.rAA a ((prxa.20)) and a ((prxa.abc123))."
   );
 
   expect(keywords.length).toBe(3);
   expect(keywords).toContain("mm.user_name");
   expect(keywords).toContain("prxa.20");
-  expect(keywords).toContain("prxar.abc123");
+  expect(keywords).toContain("prxa.abc123");
 });
