@@ -19,7 +19,7 @@ When you run a custom MSC, Mattermost will send off an HTTP request to the Reque
   channel_name: '${channel name where you entered the slash command}',
   command: '/test',
   response_url: '${url to send later responses to .com}',
-  team_domain: '${the team domain}',
+  team_domain: '${the team name}',
   team_id: '${the team id}',
   text: 'hi there',
   token: '${token of client request (jumbled characters)}',
