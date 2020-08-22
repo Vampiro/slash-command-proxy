@@ -41,35 +41,35 @@ In this URL, you will notice that it consists of the parameters `prx.url` and `p
 
 ### Keywords
 
-| Keyword  | Values                                                                                      |
-| -------- | ------------------------------------------------------------------------------------------- |
-| `prx.*`  | `*` is either `url` or `output`                                                             |
-| `prxa.*` | `*` is a number (0-based) that represents a word's position after the Command Trigger Word. |
-| `prxr.*` | `*` is any attribute in the result from the End Server.                                     |
-| `mm.*`   | `*` is any of the additional params Mattermost tacked on to the MSC request:                |
-|          | `channel_id`, `channel_name`, `command`, `response_url`, `team_domain`, `team_id`,          |
-|          | `text`, `token`, `trigger_id`, `user_id`, `user_name`                                       |
+| Keyword   | Values                                                                                      |
+| --------- | ------------------------------------------------------------------------------------------- |
+| `prx.*`   | `*` is either `url` or `output`                                                             |
+| `args[#]` | `#` is a number (0-based) that represents a word's position after the Command Trigger Word. |
+| `res.*`   | `*` is any attribute in the result from the End Server.                                     |
+| `mm.*`    | `*` is any of the additional params Mattermost tacked on to the MSC request:                |
+|           | `channel_id`, `channel_name`, `command`, `response_url`, `team_domain`, `team_id`,          |
+|           | `text`, `token`, `trigger_id`, `user_id`, `user_name`                                       |
 
 ### Proxied URL
 
 The only required parameter that you must add to your Request URL is `prx.url` which is the URL of the End Server where the request will be sent via the MSCP. The URL can be formulated using any of the keywords below:
 
-- `prxa.*`
+- `args[#]`
 - `mm.*`
 
-Example: `http://fake-dice-roll.com?dType=((prxa.1))`
+Example: `http://fake-dice-roll.com?dType=((args[0]))`
 
 Notice that keywords get wrapped in double parentheses.
 
 ### Command trigger arguments
 
-The `prxa.*` keyword refers to the arguments passed to the Command Trigger Word. The `*` is the 0-based index of the argument after the Command Trigger word.
+The `args[#]` keyword refers to the arguments passed to the Command Trigger Word. The `#` is the 0-based index of the argument after the Command Trigger word.
 
-So if you do something like this `/roll 20`, then `prxa.0` is `20`.
+So if you do something like this `/roll 20`, then `args[0]` is `20`.
 
 ### Response attributes
 
-The `prxr.*` keyword refers to the attributes in a JSON response from the End Server. These are useful for formulating your [Output](#output). So if the End server responds back with:
+The `res.*` keyword refers to the attributes in a JSON response from the End Server. These are useful for formulating your [Output](#output). So if the End server responds back with:
 
 ```json
 {
@@ -77,7 +77,22 @@ The `prxr.*` keyword refers to the attributes in a JSON response from the End Se
 }
 ```
 
-You would be able to formulate your output like `Magic 8 Ball says: ((prxr.answer))`.
+You would be able to formulate your output like "`Magic 8 Ball says: ((res.answer))`"
+
+You can also deal with nested attributes as well as arrays:
+
+```json
+{
+  "users": [
+    {
+      "name": "John Wick",
+      "title": "Assassin"
+    }
+  ]
+}
+```
+
+You could formulate your output like "`((res.users[0].name)) is an ((res.users[0].title)).`"
 
 ### Output
 
@@ -85,13 +100,13 @@ If you add the `prx.output` parameter to the Request URL, you can format the tex
 
 You can use any of the following MSCP keywords to help format the output displayed in Mattermost.
 
-- `prxa.*`
-- `prxr.*`
+- `args[#]`
+- `res.*`
 - `mm.*`
 
-These must be wrapped in double parentheses, e.g. `((prxr.attr1))`. So you might have something like the following for your `prx.output`:
+These must be wrapped in double parentheses, e.g. `((res.attr1))`. So you might have something like the following for your `prx.output`:
 
-`Hello there ((mm.username)). The result of your query is ((prxr.result)).`
+`Hello there ((mm.username)). The result of your query is ((res.answer)).`
 
 # Running the app
 

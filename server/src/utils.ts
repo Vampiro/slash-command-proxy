@@ -1,11 +1,12 @@
-export enum KeywordPrefix {
+export enum KeywordType {
+  ARGS = "args",
   MAIN = "prx",
-  ARGS = "prxa",
-  RESPONSE = "prxr",
   MM = "mm",
+  RESPONSE = "res",
 }
 
 export type KeywordCollection = {
+  args: string[];
   mm: {
     channel_id: string;
     channel_name: string;
@@ -19,12 +20,11 @@ export type KeywordCollection = {
     user_id: string;
     user_name: string;
   };
-  prx: Object;
-  prxa: Object;
-  prxr: Object;
+  prx: { url: string, output?: string };
+  res: Object;
 };
 
-// takes a string like "Hello, ((mm.user_name)), your answer is ((prxr.answer))."
+// takes a string like "Hello, ((mm.user_name)), your answer is ((res.answer))."
 // replaces keywords found with appropriate values.
 export function formulateOutput(
   outputTemplate: string,
@@ -57,7 +57,7 @@ export function getKeywords(outputTemplate: string): Set<string> {
   return keywordSet;
 }
 
-// given a keyword string such as prxr.result.abc[0].def, will retrieve the value
+// given a keyword string such as res.result.abc[0].def, will retrieve the value
 // of this out of the keyword collection
 export function getKeywordValue(keyword: string, kc: KeywordCollection) {
   const keywordParts = keyword.split(".");
