@@ -21,12 +21,11 @@ const keywordCollection: KeywordCollection = {
   },
   prx: {},
   prxa: {},
-  prxr: { result: { abc: ["hello", "world"] } },
+  prxr: {
+    result: { abc: ["hello", "world"] },
+    answer: 42,
+  },
 };
-
-test("formulate output", () => {
-  expect(formulateOutput("Hello World", keywordCollection)).toBe("Hello World");
-});
 
 test("get keyword map from template", () => {
   const keywords = getKeywords(
@@ -34,10 +33,10 @@ test("get keyword map from template", () => {
   );
 
   expect(keywords.size).toBe(4);
-  expect(keywords.has("prxa.20")).toEqual(true);
-  expect(keywords.has("prxa.abc123")).toEqual(true);
-  expect(keywords.has("prxr.rawr")).toEqual(true);
-  expect(keywords.has("mm.user_name")).toEqual(true);
+  expect(keywords.has("prxa.20")).toBe(true);
+  expect(keywords.has("prxa.abc123")).toBe(true);
+  expect(keywords.has("prxr.rawr")).toBe(true);
+  expect(keywords.has("mm.user_name")).toBe(true);
 });
 
 test("get keyword value", () => {
@@ -45,4 +44,23 @@ test("get keyword value", () => {
   expect(getKeywordValue("prxr.result.abc[1]", keywordCollection)).toBe(
     "world"
   );
+});
+
+test("formulate output", () => {
+  const outputTemplateString =
+    "Hello, ((mm.user_name)), your answer is ((prxr.answer)).";
+  const output = formulateOutput(outputTemplateString, keywordCollection);
+  expect(output).toBe("Hello, raauld, your answer is 42.");
+
+  const outputTemplateString2 =
+    "Hello, ((mm.user_name12)), your answer is ((prxr.answer)).";
+  const output2 = formulateOutput(outputTemplateString2, keywordCollection);
+  expect(output2).toBe(
+    "Hello, ((mm.user_name12 is undefined)), your answer is 42."
+  );
+
+  const outputTemplateString3 =
+    "((prxr.result.abc[0])) ((mm.user_name)), your answer is ((prxr.answer)).";
+  const output3 = formulateOutput(outputTemplateString3, keywordCollection);
+  expect(output3).toBe("hello raauld, your answer is 42.");
 });

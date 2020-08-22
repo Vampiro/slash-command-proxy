@@ -24,18 +24,20 @@ export type KeywordCollection = {
   prxr: Object;
 };
 
+// takes a string like "Hello, ((mm.user_name)), your answer is ((prxr.answer))."
+// replaces keywords found with appropriate values.
 export function formulateOutput(
   outputTemplate: string,
   keywordCollection: KeywordCollection
 ) {
-  // "Hello, ((mm.user_name)), your answer is ((prxr.answer))"
   const keywordsUsed = getKeywords(outputTemplate);
 
-  // TODO compare prefix to KeywordPrefixes.. pass attr and appropriate object (prxa, prxr, or mm) to another function that can get the correct value out
-  // const args = keywordMap.get(KeywordPrefix.ARGS);
-  // if (args) {
-  //   for (let i = 0; i < args.length; i++) {}
-  // }
+  keywordsUsed.forEach((keyword) => {
+    let value = getKeywordValue(keyword, keywordCollection);
+    value ??= `((${keyword} is undefined))`;
+
+    outputTemplate = outputTemplate.replace(`((${keyword}))`, value);
+  });
 
   return outputTemplate;
 }
@@ -59,7 +61,8 @@ export function getKeywords(outputTemplate: string): Set<string> {
 // of this out of the keyword collection
 export function getKeywordValue(keyword: string, kc: KeywordCollection) {
   const keywordParts = keyword.split(".");
-  let parentObject = kc;
+  let parentObject: any = kc;
+
   for (let i = 0; i < keywordParts.length && parentObject !== undefined; i++) {
     let val: any;
     const kp = keywordParts[i];
