@@ -1,10 +1,12 @@
 import * as Koa from "koa";
 import * as KoaRouter from "@koa/router";
 import * as KoaStatic from "koa-static";
+import * as KoaCors from "@koa/cors";
 import axios from "axios";
 import { KeywordCollection, replaceKeywords } from "./utils";
 
 const server = new Koa();
+server.use(KoaCors());
 const router = new KoaRouter();
 const reactBuildDir = "../client/build/";
 

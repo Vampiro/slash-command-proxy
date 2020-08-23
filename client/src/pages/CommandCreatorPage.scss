@@ -1,0 +1,21 @@
+.CommandCreatorPage {
+  display: flex;
+  justify-content: center;
+
+  .command-creator {
+  }
+
+  .command-test {
+    margin-top: 16px;
+  }
+
+  .left-col {
+    // margin-right: 4px;
+    width: 48%;
+  }
+
+  .right-col {
+    margin-left: 4px;
+    width: 48%;
+  }
+}

@@ -1,0 +1,36 @@
+.App {
+  $nav-bar-height: 48px;
+  height: 100vh;
+
+  .nav-bar {
+    min-height: $nav-bar-height;
+  }
+
+  .main-content {
+    margin-top: 20px;
+
+    .command-creator-page {
+      width: 100%;
+    }
+  }
+
+  .MuiCardHeader-root {
+    padding-bottom: 0px;
+
+    .MuiCardHeader-title {
+      font-size: 1.2rem;
+    }
+  }
+  .MuiCardContent-root {
+    padding-top: 4px;
+
+    &:last-child {
+      padding-bottom: 8px;
+    }
+  }
+
+  .MuiTextField-root {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}

@@ -1,24 +1,23 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import CommandCreatorPage from "./pages/CommandCreatorPage";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar position="static">
+        <Toolbar classes={{ root: "nav-bar" }}>
+          <Typography variant="h6" color="inherit">
+            Mattermost Slash Command Proxy
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div className="main-content">
+        <div className="command-creator-page">
+          <CommandCreatorPage></CommandCreatorPage>
+        </div>
+      </div>
     </div>
   );
 }
