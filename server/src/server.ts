@@ -48,9 +48,8 @@ router.get("/proxy", async (ctx, next) => {
   } catch (error) {
     response.text = `Encountered error from proxied server: ${error}`;
   }
-  ctx.body = response;
 
-  return;
+  ctx.body = response;
 });
 
 server.use(KoaStatic(reactBuildDir));
