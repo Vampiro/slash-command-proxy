@@ -4,7 +4,7 @@ import * as KoaStatic from "koa-static";
 import axios from "axios";
 import { KeywordCollection, replaceKeywords } from "./utils";
 
-const app = new Koa();
+const server = new Koa();
 const router = new KoaRouter();
 const reactBuildDir = "../client/build/";
 
@@ -17,7 +17,7 @@ type ProxyResponse = {
 
 router.get("/proxy", async (ctx, next) => {
   const kc: KeywordCollection = {
-    args: ctx.query.text.split(" "),
+    args: ctx.query.text ? ctx.query.text.split(" ") : [],
     mm: {
       channel_id: ctx.query.channel_id,
       channel_name: ctx.query.channel_name,
@@ -53,7 +53,7 @@ router.get("/proxy", async (ctx, next) => {
   return;
 });
 
-app.use(KoaStatic(reactBuildDir));
-app.use(router.middleware());
+server.use(KoaStatic(reactBuildDir));
+server.use(router.middleware());
 
-app.listen(process.env.PORT || 80);
+server.listen(process.env.PORT || 80);
