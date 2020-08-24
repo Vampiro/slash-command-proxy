@@ -17,7 +17,7 @@ import Showdown from "showdown";
 import "./CommandTest.scss";
 
 type CommandTestProps = {
-  args?: string;
+  args: string;
   onArgsChange?: (args: string) => void;
   outputTemplate: string;
   proxiedUrl: string;
@@ -45,19 +45,14 @@ const useStyles = makeStyles((theme) => ({
 
 function CommandTest(props: CommandTestProps) {
   const classes = useStyles();
-  const [args, setArgs] = useState<string>(props.args ?? "");
   const [testResult, setTestResult] = useState<string>("");
   const [loading, setLoading] = React.useState(false);
 
-  // needed in the event that the props are ever changed.
   useEffect(() => {
-    if (props.args) {
-      setArgs(props.args);
-    }
+    setTestResult("");
   }, [props]);
 
   const handleArgsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setArgs(event.target.value);
     if (props.onArgsChange) {
       props.onArgsChange(event.target.value);
     }
@@ -74,7 +69,11 @@ function CommandTest(props: CommandTestProps) {
     setLoading(true);
     try {
       const response = await Axios.get(
-        createCommandUrlForTest(props.proxiedUrl, props.outputTemplate, args)
+        createCommandUrlForTest(
+          props.proxiedUrl,
+          props.outputTemplate,
+          props.args
+        )
       );
       setTestResult(response.data.text);
     } catch (error) {
@@ -98,7 +97,7 @@ function CommandTest(props: CommandTestProps) {
                 onChange={handleArgsChange}
                 onKeyDown={handleKeyDown}
                 size="small"
-                value={args}
+                value={props.args}
                 variant="outlined"
               ></TextField>
             </Grid>
