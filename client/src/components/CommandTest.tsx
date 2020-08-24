@@ -12,7 +12,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { createCommandUrlForTest } from "../Utils";
 import CallMadeIcon from "@material-ui/icons/CallMade";
 import { makeStyles } from "@material-ui/core/styles";
-import { blue } from "@material-ui/core/colors";
+import { indigo } from "@material-ui/core/colors";
 import "./CommandTest.scss";
 
 type CommandTestProps = {
@@ -27,13 +27,13 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   button: {
-    backgroundColor: blue[700],
+    backgroundColor: indigo[500],
     "&:hover": {
-      backgroundColor: blue[900],
+      backgroundColor: indigo[700],
     },
   },
   fabProgress: {
-    color: blue[700],
+    color: indigo[500],
     left: -3,
     pointerEvents: "none",
     position: "absolute",
