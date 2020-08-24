@@ -8,11 +8,12 @@ import {
   TextField,
 } from "@material-ui/core";
 import Axios from "axios";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState, KeyboardEvent } from "react";
 import { createCommandUrlForTest } from "../Utils";
 import CallMadeIcon from "@material-ui/icons/CallMade";
 import { makeStyles } from "@material-ui/core/styles";
 import { indigo } from "@material-ui/core/colors";
+import Showdown from "showdown";
 import "./CommandTest.scss";
 
 type CommandTestProps = {
@@ -62,6 +63,13 @@ function CommandTest(props: CommandTestProps) {
     }
   };
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleGoClick();
+    }
+  };
+
   const handleGoClick = async () => {
     setLoading(true);
     try {
@@ -75,6 +83,8 @@ function CommandTest(props: CommandTestProps) {
     setLoading(false);
   };
 
+  const showdownConverter = new Showdown.Converter();
+
   return (
     <div className="CommandTest">
       <Card>
@@ -85,8 +95,8 @@ function CommandTest(props: CommandTestProps) {
               <TextField
                 fullWidth
                 label="Command Args"
-                multiline
                 onChange={handleArgsChange}
+                onKeyDown={handleKeyDown}
                 size="small"
                 value={args}
                 variant="outlined"
@@ -111,7 +121,11 @@ function CommandTest(props: CommandTestProps) {
               </div>
             </Grid>
           </Grid>
-          <div>{testResult}</div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: showdownConverter.makeHtml(testResult),
+            }}
+          ></div>
         </CardContent>
       </Card>
     </div>
