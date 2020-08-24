@@ -7,33 +7,41 @@ import {
   TextField,
 } from "@material-ui/core";
 import Axios from "axios";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { createCommandUrlForTest } from "../Utils";
+
 import "./CommandTest.scss";
 
 type CommandTestProps = {
+  args?: string;
+  onArgsChange?: (args: string) => void;
   outputTemplate: string;
   proxiedUrl: string;
-  args?: string;
 };
 
 function CommandTest(props: CommandTestProps) {
   const [args, setArgs] = useState<string>(props.args ?? "");
   const [testResult, setTestResult] = useState<string>("");
 
+  // needed in the event that the props are ever changed.
+  useEffect(() => {
+    if (props.args) {
+      setArgs(props.args);
+    }
+  }, [props]);
+
   const handleArgsChange = (event: ChangeEvent<HTMLInputElement>) => {
     setArgs(event.target.value);
+    if (props.onArgsChange) {
+      props.onArgsChange(event.target.value);
+    }
   };
-
-  const commandUrl = createCommandUrlForTest(
-    props.proxiedUrl,
-    props.outputTemplate,
-    args
-  );
 
   const handleGoClick = async () => {
     try {
-      const response = await Axios.get(commandUrl);
+      const response = await Axios.get(
+        createCommandUrlForTest(props.proxiedUrl, props.outputTemplate, args)
+      );
       setTestResult(response.data.text);
     } catch (error) {
       setTestResult(`An error occurred: ${error}`);
@@ -53,6 +61,7 @@ function CommandTest(props: CommandTestProps) {
                 multiline
                 onChange={handleArgsChange}
                 size="small"
+                value={args}
                 variant="outlined"
               ></TextField>
             </Grid>
@@ -68,6 +77,7 @@ function CommandTest(props: CommandTestProps) {
               </Button>
             </Grid>
           </Grid>
+          <div>{props.proxiedUrl}</div>
           <div>{testResult}</div>
         </CardContent>
       </Card>

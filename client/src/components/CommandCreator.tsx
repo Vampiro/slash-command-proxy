@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, TextField } from "@material-ui/core";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { createCommandUrl } from "../Utils";
-import "./CommandCreator.scss";
 
 type CommandCreatorProps = {
   onOutputTemplateChange?: (outputTemplate: string) => void;
@@ -16,36 +15,37 @@ type CommandCreatorProps = {
 // command args: 20
 
 function CommandCreator(props: CommandCreatorProps) {
-  const [outputTemplate, setOutputTemplate] = useState<string>(
+  const [proxiedUrl, setProxiedUrl] = useState(props.proxiedUrl ?? "");
+  const [outputTemplate, setOutputTemplate] = useState(
     props.outputTemplate ?? ""
   );
-  const [proxiedUrl, setProxiedUrl] = useState<string>(props.proxiedUrl ?? "");
 
-  const { onOutputTemplateChange, onProxiedUrlChange } = props;
+  // needed in the event that the props are ever changed.
   useEffect(() => {
-    if (onOutputTemplateChange) {
-      onOutputTemplateChange(outputTemplate);
+    if (props.proxiedUrl) {
+      setProxiedUrl(props.proxiedUrl);
     }
-  }, [outputTemplate, onOutputTemplateChange]);
 
-  useEffect(() => {
-    if (onProxiedUrlChange) {
-      onProxiedUrlChange(proxiedUrl);
+    if (props.outputTemplate) {
+      setOutputTemplate(props.outputTemplate);
     }
-  }, [proxiedUrl, onProxiedUrlChange]);
+  }, [props]);
 
   // handler for proxied url text field
   const handleProxiedUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
     setProxiedUrl(event.target.value);
+    if (props.onProxiedUrlChange) {
+      props.onProxiedUrlChange(event.target.value);
+    }
   };
 
   // handler for output template text field
   const handleOutputTemplateChange = (event: ChangeEvent<HTMLInputElement>) => {
     setOutputTemplate(event.target.value);
+    if (props.onOutputTemplateChange) {
+      props.onOutputTemplateChange(event.target.value);
+    }
   };
-
-  // create the command url
-  const commandUrl = createCommandUrl(proxiedUrl, outputTemplate);
 
   return (
     <div className="CommandCreator">
@@ -53,21 +53,21 @@ function CommandCreator(props: CommandCreatorProps) {
         <CardHeader title="Command Creator" />
         <CardContent>
           <TextField
-            defaultValue={proxiedUrl}
             fullWidth
             label="Proxied URL"
             multiline
             onChange={handleProxiedUrlChange}
             size="small"
+            value={proxiedUrl}
             variant="outlined"
           ></TextField>
           <TextField
-            defaultValue={outputTemplate}
             fullWidth
             label="Output Template"
             multiline
             onChange={handleOutputTemplateChange}
             size="small"
+            value={outputTemplate}
             variant="outlined"
           ></TextField>
           <TextField
@@ -76,7 +76,7 @@ function CommandCreator(props: CommandCreatorProps) {
             label="Command URL"
             multiline
             size="small"
-            value={commandUrl}
+            value={createCommandUrl(proxiedUrl, outputTemplate)}
             variant="outlined"
           ></TextField>
         </CardContent>
