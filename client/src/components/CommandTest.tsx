@@ -1,15 +1,18 @@
 import {
-  Button,
   Card,
   CardContent,
   CardHeader,
+  CircularProgress,
+  Fab,
   Grid,
   TextField,
 } from "@material-ui/core";
 import Axios from "axios";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { createCommandUrlForTest } from "../Utils";
-
+import CallMadeIcon from "@material-ui/icons/CallMade";
+import { makeStyles } from "@material-ui/core/styles";
+import { blue } from "@material-ui/core/colors";
 import "./CommandTest.scss";
 
 type CommandTestProps = {
@@ -19,9 +22,31 @@ type CommandTestProps = {
   proxiedUrl: string;
 };
 
+const useStyles = makeStyles((theme) => ({
+  buttonWrapper: {
+    position: "relative",
+  },
+  button: {
+    backgroundColor: blue[700],
+    "&:hover": {
+      backgroundColor: blue[900],
+    },
+  },
+  fabProgress: {
+    color: blue[700],
+    left: -3,
+    pointerEvents: "none",
+    position: "absolute",
+    top: -3,
+    zIndex: 1,
+  },
+}));
+
 function CommandTest(props: CommandTestProps) {
+  const classes = useStyles();
   const [args, setArgs] = useState<string>(props.args ?? "");
   const [testResult, setTestResult] = useState<string>("");
+  const [loading, setLoading] = React.useState(false);
 
   // needed in the event that the props are ever changed.
   useEffect(() => {
@@ -38,6 +63,7 @@ function CommandTest(props: CommandTestProps) {
   };
 
   const handleGoClick = async () => {
+    setLoading(true);
     try {
       const response = await Axios.get(
         createCommandUrlForTest(props.proxiedUrl, props.outputTemplate, args)
@@ -46,6 +72,7 @@ function CommandTest(props: CommandTestProps) {
     } catch (error) {
       setTestResult(`An error occurred: ${error}`);
     }
+    setLoading(false);
   };
 
   return (
@@ -66,18 +93,24 @@ function CommandTest(props: CommandTestProps) {
               ></TextField>
             </Grid>
             <Grid item>
-              <Button
-                color="primary"
-                onClick={() => {
-                  handleGoClick();
-                }}
-                variant="contained"
-              >
-                Go
-              </Button>
+              <div className={classes.buttonWrapper}>
+                <Fab
+                  aria-label="go"
+                  color="primary"
+                  className={classes.button}
+                  onClick={() => {
+                    handleGoClick();
+                  }}
+                  size="small"
+                >
+                  <CallMadeIcon></CallMadeIcon>
+                </Fab>
+                {loading && (
+                  <CircularProgress size={45} className={classes.fabProgress} />
+                )}
+              </div>
             </Grid>
           </Grid>
-          <div>{props.proxiedUrl}</div>
           <div>{testResult}</div>
         </CardContent>
       </Card>
