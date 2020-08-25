@@ -5,8 +5,8 @@ export function createCommandUrl(proxiedUrl: string, outputTemplate?: string) {
   let outputParam =
     outputTemplate === undefined
       ? ""
-      : `&prx.output=${encodeURI(outputTemplate)}`;
-  return `${proxyUrl}?prx.url=${encodeURI(proxiedUrl)}${outputParam}`;
+      : `&prx.output=${encodeURIComponent(outputTemplate)}`;
+  return `${proxyUrl}?prx.url=${encodeURIComponent(proxiedUrl)}${outputParam}`;
 }
 
 export function createCommandUrlForTest(
