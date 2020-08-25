@@ -13,7 +13,7 @@ import { createCommandUrlForTest } from "../Utils";
 import CallMadeIcon from "@material-ui/icons/CallMade";
 import { makeStyles } from "@material-ui/core/styles";
 import { indigo } from "@material-ui/core/colors";
-import Showdown from "showdown";
+import ReactMarkdown from "react-markdown";
 import "./CommandTest.scss";
 
 type CommandTestProps = {
@@ -82,8 +82,6 @@ function CommandTest(props: CommandTestProps) {
     setLoading(false);
   };
 
-  const showdownConverter = new Showdown.Converter();
-
   return (
     <div className="CommandTest">
       <Card>
@@ -120,11 +118,7 @@ function CommandTest(props: CommandTestProps) {
               </div>
             </Grid>
           </Grid>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: showdownConverter.makeHtml(testResult),
-            }}
-          ></div>
+          <ReactMarkdown source={testResult}></ReactMarkdown>
         </CardContent>
       </Card>
     </div>
