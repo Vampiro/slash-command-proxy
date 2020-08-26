@@ -60,7 +60,7 @@ So with the `JSON` we received from the DiceAPI, our `variable` would be `((res.
 
 In this example, we're always rolling a 20-sided die. What if we wanted to set up our Slash Command using an n-sided die that the user inputs when the command is run? This is where the **Args** `variable` comes in.
 
-## Using Args
+## Args
 
 Just like adding things from the `JSON` response to the **Output Template**, we can also add **Args** to either the **Destination URL** or the **Ouput Template**. In our case, we would like to send along a number with the DiceAPI request.
 
