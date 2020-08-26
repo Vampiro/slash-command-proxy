@@ -13,7 +13,7 @@ import { createCommandUrlForTest } from "../Utils";
 import CallMadeIcon from "@material-ui/icons/CallMade";
 import { makeStyles } from "@material-ui/core/styles";
 import { indigo } from "@material-ui/core/colors";
-import ReactMarkdown from "react-markdown";
+import marked from "marked";
 import "./CommandTest.scss";
 
 type CommandTestProps = {
@@ -118,7 +118,7 @@ function CommandTest(props: CommandTestProps) {
               </div>
             </Grid>
           </Grid>
-          <ReactMarkdown source={testResult}></ReactMarkdown>
+          <div dangerouslySetInnerHTML={{ __html: marked(testResult) }}></div>
         </CardContent>
       </Card>
     </div>

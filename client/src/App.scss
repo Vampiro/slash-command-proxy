@@ -4,14 +4,17 @@
 
   .nav-bar {
     min-height: $nav-bar-height;
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
   }
 
   .main-content {
     margin-top: 20px;
-
-    .command-creator-page {
-      width: 100%;
-    }
   }
 
   .MuiCardHeader-root {
