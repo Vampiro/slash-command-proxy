@@ -20,23 +20,20 @@ export type KeywordCollection = {
     user_id: string;
     user_name: string;
   };
-  prx: { url: string, output?: string };
+  prx: { url: string; output?: string };
   res: string | Object;
 };
 
-// takes a string like "Hello, ((mm.user_name)), your answer is ((res.answer))."
+// takes a string like "Hello, ${mm.user_name}, your answer is ${res.answer}."
 // replaces keywords found with appropriate values.
-export function replaceKeywords(
-  str: string,
-  kc: KeywordCollection
-) {
+export function replaceKeywords(str: string, kc: KeywordCollection) {
   const keywordsUsed = getKeywords(str);
 
   keywordsUsed.forEach((keyword) => {
     let value = getKeywordValue(keyword, kc);
-    value ??= `((${keyword} is undefined))`;
+    value ??= `\${${keyword} is undefined}`;
 
-    str = str.replace(`((${keyword}))`, value);
+    str = str.replace(`\${${keyword}}`, value);
   });
 
   return str;
@@ -46,7 +43,7 @@ export function getKeywords(str: string): Set<string> {
   const keywordSet = new Set<string>();
 
   // creates two groups, (prefix).(attr)
-  const regex = /\(\(([a-z0-9\[\]\._\-]+)\)\)/gi;
+  const regex = /\${([a-z0-9\[\]\._\-]+)}/gi;
 
   let matches: string[];
   while ((matches = regex.exec(str))) {

@@ -10,9 +10,6 @@ server.use(KoaCors());
 const router = new KoaRouter();
 const reactBuildDir = "../client/build/";
 
-// test url
-// http://localhost/proxy?prx.url=http://roll.diceapi.com/json/d((args%5B0%5D))&text=20&prx.output=((mm.user_name))%20rolls%20a%20d((args%5B0%5D))%20and%20gets%20a..%20((res.dice%5B0%5D.value))&user_name=raauld
-
 type ProxyResponse = {
   text: string | Object;
 };

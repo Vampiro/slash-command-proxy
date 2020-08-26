@@ -54,9 +54,9 @@ Mattermost expects a response where any text you want in chat should come in the
 
 ## Output Template
 
-The **Output Template** needs to be able to retrieve information from within the response. In our dice rolling example, we want to get at the `value` attribute that is nested within the `JSON` response. In the MSCP, we have access to certain `variables` by wrapping the `variable` in parentheses, e.g. `((variable))`. For anything out of the `JSON` response, we start our `variable` off with `res`.
+The **Output Template** needs to be able to retrieve information from within the response. In our dice rolling example, we want to get at the `value` attribute that is nested within the `JSON` response. In the MSCP, we have access to certain `variables` by wrapping the `variable` in parentheses, e.g. `${variable}`. For anything out of the `JSON` response, we start our `variable` off with `res`.
 
-So with the `JSON` we received from the DiceAPI, our `variable` would be `((res.dice[0].value))`. So to bring it all together, your **Output Template** should be something like "You rolled a `((res.dice[0].value))`!"
+So with the `JSON` we received from the DiceAPI, our `variable` would be `${res.dice[0].value}`. So to bring it all together, your **Output Template** should be something like "You rolled a `${res.dice[0].value}`!"
 
 In this example, we're always rolling a 20-sided die. What if we wanted to set up our Slash Command using an n-sided die that the user inputs when the command is run? This is where the **Args** `variable` comes in.
 
@@ -66,14 +66,14 @@ Just like adding things from the `JSON` response to the **Output Template**, we 
 
 In our **Request URL**, we had http://roll.diceapi.com/json/d20
 
-Using **Args**, we can send along user input along with the request: http\://roll.diceapi.com/json/d((args[0]))
+Using **Args**, we can send along user input along with the request: http\://roll.diceapi.com/json/d\${args[0]}
 
 ## Command Creator
 
 So to put it all together, we would go to the MSCP Command Creator tool and enter:
 
-1. **Destination URL**: http\://roll.diceapi.com/json/d((args[0]))
-2. **Output Template**: You rolled a ((res.dice[0].value))!
+1. **Destination URL**: http\://roll.diceapi.com/json/d\${args[0]}
+2. **Output Template**: You rolled a \${res.dice[0].value}!
 
 We copy the contents of **Command URL** and paste them into the URL in Mattermost where we are creating our Slash Command. Then in our chat, we can type `/roll 20` and get back the results of a 20-sided die roll. `/roll 6` would give us results for a 6-sided die roll.
 

@@ -1,5 +1,5 @@
-const proxyUrl = "https://mm-slash-commands.herokuapp.com/proxy";
-// const proxyUrl = "http://localhost/proxy";
+// const proxyUrl = "https://mm-slash-commands.herokuapp.com/proxy";
+const proxyUrl = "http://localhost/proxy";
 
 export function createCommandUrl(proxiedUrl: string, outputTemplate?: string) {
   let outputParam =
