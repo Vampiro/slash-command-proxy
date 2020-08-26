@@ -13,7 +13,7 @@ function App() {
         <AppBar position="static">
           <Toolbar classes={{ root: "nav-bar" }}>
             <Typography variant="h6" color="inherit">
-              <Link to="/">Mattermost Slash Command Proxy</Link>
+              <Link to="/">Slash Command Proxy</Link>
             </Typography>
             <Link to="/help">
               <HelpOutlineIcon></HelpOutlineIcon>

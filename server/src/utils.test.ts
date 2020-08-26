@@ -9,7 +9,7 @@ import {
 
 const keywordCollection: KeywordCollection = {
   args: ["20"],
-  mm: {
+  client: {
     channel_id: "abc123",
     channel_name: "Town Hall",
     command: "roll",
@@ -34,36 +34,36 @@ const keywordCollection: KeywordCollection = {
 
 test("get keywords", () => {
   const keywords = getKeywords(
-    "Hello ${mm.user_name}. You rolled AAres.rAA a ${args[0]} and a ${args[1]} ${res.rawr}."
+    "Hello ${client.user_name}. You rolled AAres.rAA a ${args[0]} and a ${args[1]} ${res.rawr}."
   );
 
   expect(keywords.size).toBe(4);
   expect(keywords.has("args[0]")).toBe(true);
   expect(keywords.has("args[1]")).toBe(true);
   expect(keywords.has("res.rawr")).toBe(true);
-  expect(keywords.has("mm.user_name")).toBe(true);
+  expect(keywords.has("client.user_name")).toBe(true);
 });
 
 test("get keyword value", () => {
-  expect(getKeywordValue("mm.user_name", keywordCollection)).toBe("raauld");
+  expect(getKeywordValue("client.user_name", keywordCollection)).toBe("raauld");
   expect(getKeywordValue("res.result.abc[1]", keywordCollection)).toBe("world");
 });
 
 test("replacing keywords", () => {
   const outputTemplateString =
-    "Hello, ${mm.user_name}, your answer is ${res.answer}.";
+    "Hello, ${client.user_name}, your answer is ${res.answer}.";
   const output = replaceKeywords(outputTemplateString, keywordCollection);
   expect(output).toBe("Hello, raauld, your answer is 42.");
 
   const outputTemplateString2 =
-    "Hello, ${mm.user_name12}, your answer is ${res.answer}.";
+    "Hello, ${client.user_name12}, your answer is ${res.answer}.";
   const output2 = replaceKeywords(outputTemplateString2, keywordCollection);
   expect(output2).toBe(
-    "Hello, ${mm.user_name12 is undefined}, your answer is 42."
+    "Hello, ${client.user_name12 is undefined}, your answer is 42."
   );
 
   const outputTemplateString3 =
-    "${res.result.abc[0]} ${mm.user_name}, your answer is ${res.answer}.";
+    "${res.result.abc[0]} ${client.user_name}, your answer is ${res.answer}.";
   const output3 = replaceKeywords(outputTemplateString3, keywordCollection);
   expect(output3).toBe("hello raauld, your answer is 42.");
 });

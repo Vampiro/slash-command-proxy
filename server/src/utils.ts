@@ -1,13 +1,6 @@
-export enum KeywordType {
-  ARGS = "args",
-  MAIN = "prx",
-  MM = "mm",
-  RESPONSE = "res",
-}
-
 export type KeywordCollection = {
   args: string[];
-  mm: {
+  client: {
     channel_id: string;
     channel_name: string;
     command: string;
@@ -20,11 +13,10 @@ export type KeywordCollection = {
     user_id: string;
     user_name: string;
   };
-  prx: { url: string; output?: string };
   res: string | Object;
 };
 
-// takes a string like "Hello, ${mm.user_name}, your answer is ${res.answer}."
+// takes a string like "Hello, ${client.user_name}, your answer is ${res.answer}."
 // replaces keywords found with appropriate values.
 export function replaceKeywords(str: string, kc: KeywordCollection) {
   const keywordsUsed = getKeywords(str);

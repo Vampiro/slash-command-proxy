@@ -17,7 +17,7 @@ type ProxyResponse = {
 router.get("/proxy", async (ctx, next) => {
   const kc: KeywordCollection = {
     args: ctx.query.text ? ctx.query.text.split(" ") : [],
-    mm: {
+    client: {
       channel_id: ctx.query.channel_id,
       channel_name: ctx.query.channel_name,
       command: ctx.query.command,
@@ -30,22 +30,24 @@ router.get("/proxy", async (ctx, next) => {
       user_id: ctx.query.user_id,
       user_name: ctx.query.user_name,
     },
-    prx: { url: ctx.query["prx.url"], output: ctx.query["prx.output"] },
     res: {},
   };
 
   let response: ProxyResponse = { text: "" };
-  let proxiedUrl = replaceKeywords(ctx.query["prx.url"], kc);
+  const destUrl = replaceKeywords(ctx.query["prx.url"], kc);
+  const outputTemplate = ctx.query["prx.output"];
 
   try {
-    const extResponse = await axios.get(proxiedUrl);
+    const extResponse = await axios.get(destUrl);
     kc.res = extResponse.data;
 
     // if user provided output template, replace keywords
     // else, just give them back the entire response
-    response.text = kc.prx.output ? replaceKeywords(kc.prx.output, kc) : kc.res;
+    response.text = outputTemplate
+      ? replaceKeywords(outputTemplate, kc)
+      : kc.res;
   } catch (error) {
-    response.text = `Encountered error from proxied server: ${error}`;
+    response.text = `Encountered error from destination server: ${error}`;
   }
 
   ctx.body = response;

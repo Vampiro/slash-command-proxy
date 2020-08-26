@@ -1,6 +1,6 @@
-# Mattermost Slash Command Proxy (MSCP)
+# Slash Command Proxy
 
-Proxies Mattermost Slash Commands (MSCs) and formulates useful responses.
+Proxies Slash Commands from [Slack](https://slack.com/) and [Mattermost](https://mattermost.com/) and formulates useful responses.
 
 # Running the app
 
@@ -12,10 +12,10 @@ Proxies Mattermost Slash Commands (MSCs) and formulates useful responses.
 
 ```bash
 # to run locally
-docker build --tag $USER/mm-slash-commands .
-docker run --name mm-slash-commands -d -p 80:80 $USER/mm-slash-commands
+docker build --tag $USER/slash-command-proxy .
+docker run --name slash-command-proxy -d -p 80:80 $USER/slash-command-proxy
 ```
 
 ## Automatic deployment
 
-A [GitHub Action](.github/workflows/main.yml) has been set up to deploy to [Heroku](https://mm-slash-commands.herokuapp.com/) with each push to the `master` branch.
+A [GitHub Action](.github/workflows/main.yml) has been set up to deploy to [Heroku](https://slash-command-proxy.herokuapp.com/) with each push to the `master` branch.

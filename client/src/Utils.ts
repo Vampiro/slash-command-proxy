@@ -1,5 +1,5 @@
-// const proxyUrl = "https://mm-slash-commands.herokuapp.com/proxy";
-const proxyUrl = "http://localhost/proxy";
+const proxyUrl = "http://slash-command-proxy.herokuapp.com/proxy";
+// const proxyUrl = "http://localhost/proxy";
 
 export function createCommandUrl(proxiedUrl: string, outputTemplate?: string) {
   let outputParam =
@@ -14,5 +14,30 @@ export function createCommandUrlForTest(
   outputTemplate?: string,
   args: string = ""
 ) {
-  return `${createCommandUrl(proxiedUrl, outputTemplate)}&text=${args}`;
+  const additionalFields: any = {
+    channel_id: "the-channel-id",
+    channel_name: "Super Channel",
+    command: "test",
+    response_url: "the-response-url",
+    team_domain: "Super Team",
+    team_id: "the-team-id",
+    text: args,
+    token: "the-token",
+    trigger_id: "the-trigger-id",
+    user_id: "the-user-id",
+    user_name: "tester",
+  };
+
+  const additionalFieldsStr = Object.keys(additionalFields)
+    .map((key) => `${key}=${encodeURIComponent(additionalFields[key])}`)
+    .join("&");
+
+  console.log(
+    `${createCommandUrl(proxiedUrl, outputTemplate)}&${additionalFieldsStr}`
+  );
+
+  return `${createCommandUrl(
+    proxiedUrl,
+    outputTemplate
+  )}&${additionalFieldsStr}`;
 }
