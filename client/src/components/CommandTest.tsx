@@ -27,12 +27,6 @@ const useStyles = makeStyles((theme) => ({
   buttonWrapper: {
     position: "relative",
   },
-  button: {
-    backgroundColor: indigo[500],
-    "&:hover": {
-      backgroundColor: indigo[700],
-    },
-  },
   fabProgress: {
     color: indigo[500],
     left: -3,
@@ -104,7 +98,6 @@ function CommandTest(props: CommandTestProps) {
                 <Fab
                   aria-label="go"
                   color="primary"
-                  className={classes.button}
                   onClick={() => {
                     handleGoClick();
                   }}
