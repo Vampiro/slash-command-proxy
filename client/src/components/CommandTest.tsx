@@ -111,7 +111,11 @@ function CommandTest(props: CommandTestProps) {
               </div>
             </Grid>
           </Grid>
-          <div dangerouslySetInnerHTML={{ __html: marked(testResult) }}></div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: marked(testResult.replace(/(\r\n|\n|\r)/, "<br/>")),
+            }}
+          ></div>
         </CardContent>
       </Card>
     </div>
