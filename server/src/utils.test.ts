@@ -1,9 +1,5 @@
-import {
-  VariableCollection,
-  getVariables,
-  getVariableValue,
-  replaceVariables,
-} from "./utils";
+import { getVariables, getVariableValue, replaceVariables } from "./utils";
+import "./types";
 
 // to run a single test: npm test -- -t "get variables"
 

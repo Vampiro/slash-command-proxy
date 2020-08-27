@@ -1,23 +1,5 @@
 import { VM } from "vm2";
 
-export type VariableCollection = {
-  args: string[];
-  client: {
-    channel_id: string;
-    channel_name: string;
-    command: string;
-    response_url: string;
-    team_domain: string;
-    team_id: string;
-    text: string;
-    token: string;
-    trigger_id: string;
-    user_id: string;
-    user_name: string;
-  };
-  res: string | Object;
-};
-
 // takes a string like "Hello, ${client.user_name}, your answer is ${res.answer}."
 // replaces variables found with appropriate values.
 // can throw an error when trying to replace

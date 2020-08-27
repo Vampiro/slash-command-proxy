@@ -3,16 +3,12 @@ import * as KoaRouter from "@koa/router";
 import * as KoaStatic from "koa-static";
 import * as KoaCors from "@koa/cors";
 import axios from "axios";
-import { VariableCollection, replaceVariables } from "./utils";
+import { replaceVariables } from "./utils";
 
 const app = new Koa();
 app.use(KoaCors());
 const router = new KoaRouter();
 const reactBuildDir = "../client/build/";
-
-type ProxyResponse = {
-  text: string | Object;
-};
 
 router.get("/proxy", async (ctx, next) => {
   const vc: VariableCollection = {
