@@ -22,10 +22,6 @@ const keywordCollection: KeywordCollection = {
     user_id: "ppppppp",
     user_name: "raauld",
   },
-  prx: {
-    url: "http://roll-some-dice.com ",
-    output: "You rolled a ${res.result}!",
-  },
   res: {
     result: { abc: ["hello", "world"] },
     answer: 42,
