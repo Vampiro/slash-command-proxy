@@ -38,18 +38,41 @@ export function replaceVariables(str: string, vc: VariableCollection) {
   return str;
 }
 
-export function getVariables(str: string): Set<string> {
-  const variableSet = new Set<string>();
+export function getVariables(str: string): string[] {
+  const variables: string[] = [];
 
-  // creates two groups, (prefix).(attr)
-  const regex = /\${([a-z0-9\[\]\._\-]+)}/gi;
+  for (let i = 0; i < str.length; i++) {
+    i = str.indexOf("${", i);
+    if (i === -1) {
+      break;
+    } else {
+      let startBraces = 1;
+      let variable = "";
+      let found = false;
+      for (i += 2; i < str.length && !found; i++) {
+        if (str[i] === "{") {
+          startBraces += 1;
+        } else if (str[i] === "}") {
+          startBraces -= 1;
+        }
 
-  let matches: string[];
-  while ((matches = regex.exec(str))) {
-    variableSet.add(matches[1]); // add the variable
+        if (startBraces !== 0) {
+          variable += str[i];
+        } else {
+          found = true;
+          break;
+        }
+      }
+
+      if (found) {
+        variables.push(variable);
+      } else {
+        throw new Error("Curly brace mismatch.");
+      }
+    }
   }
 
-  return variableSet;
+  return variables;
 }
 
 // can throw exception if something goes wrong trying to find variable

@@ -1,8 +1,8 @@
 import {
   VariableCollection,
-  replaceVariables,
   getVariables,
   getVariableValue,
+  replaceVariables,
 } from "./utils";
 
 // to run a single test: npm test -- -t "get variables"
@@ -30,37 +30,61 @@ const variableCollection: VariableCollection = {
 
 test("get variables", () => {
   const variables = getVariables(
-    "Hello ${client.user_name}. You rolled AAres.rAA a ${args[0]} and a ${args[1]} ${res.rawr}."
+    "Hello ${client.user_name}. You rolled AAres.rAA a ${args[0]} and a ${args[1]} ${res.rawr}. ${}"
   );
 
-  expect(variables.size).toBe(4);
-  expect(variables.has("args[0]")).toBe(true);
-  expect(variables.has("args[1]")).toBe(true);
-  expect(variables.has("res.rawr")).toBe(true);
-  expect(variables.has("client.user_name")).toBe(true);
+  expect(variables.length).toBe(5);
+  expect(variables[0]).toBe("client.user_name");
+  expect(variables[1]).toBe("args[0]");
+  expect(variables[2]).toBe("args[1]");
+  expect(variables[3]).toBe("res.rawr");
+  expect(variables[4]).toBe("");
+
+  expect(() => {
+    getVariables("Curly brace mismatching.. ${rawr{}");
+  }).toThrow();
+
+  expect(() => {
+    getVariables("Curly brace mismatching.. ${args[0]} ${{args[1]}");
+  }).toThrow();
 });
 
 test("replacing variables", () => {
-  const outputTemplateString =
-    "Hello, ${client.user_name}, your answer is ${res.answer}.";
-  const output = replaceVariables(outputTemplateString, variableCollection);
-  expect(output).toBe("Hello, tester, your answer is 42.");
+  expect(
+    replaceVariables(
+      "Hello, ${client.user_name}, your answer is ${res.answer}.",
+      variableCollection
+    )
+  ).toBe("Hello, tester, your answer is 42.");
 
-  const outputTemplateString2 =
-    "Hello, ${client.user_name12}, your answer is ${res.answer}.";
-  const output2 = replaceVariables(outputTemplateString2, variableCollection);
-  expect(output2).toBe(
-    "Hello, ${client.user_name12 is undefined}, your answer is 42."
+  expect(
+    replaceVariables(
+      "Hello, ${client.user_name12}, your answer is ${res.answer}.",
+      variableCollection
+    )
+  ).toBe("Hello, ${client.user_name12 is undefined}, your answer is 42.");
+
+  expect(
+    replaceVariables(
+      "${res.result.abc[0]} ${client.user_name}, your answer is ${res.answer}.",
+      variableCollection
+    )
+  ).toBe("hello tester, your answer is 42.");
+
+  expect(
+    replaceVariables("Your first arg was ${args[0]}", variableCollection)
+  ).toBe("Your first arg was 20");
+
+  expect(
+    replaceVariables(
+      'Args: ${args.map((arg) => `arg=${arg}`).join(" ")}',
+      variableCollection
+    )
+  ).toBe("Args: arg=20 arg=40 arg=60");
+
+  expect(replaceVariables("Rawr ${}", variableCollection)).toBe(
+    "Rawr ${ is undefined}"
   );
-
-  const outputTemplateString3 =
-    "${res.result.abc[0]} ${client.user_name}, your answer is ${res.answer}.";
-  const output3 = replaceVariables(outputTemplateString3, variableCollection);
-  expect(output3).toBe("hello tester, your answer is 42.");
-
-  const outputTemplateString4 = "Your first arg was ${args[0]}";
-  const output4 = replaceVariables(outputTemplateString4, variableCollection);
-  expect(output4).toBe("Your first arg was 20");
 });
 
 test("get variable value vm", () => {
