@@ -4,10 +4,12 @@ import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+// React.StrictMode disabled due to current blasts of warnings about Material UI Tooltips. To be fixed in MUI v5
+// https://github.com/mui-org/material-ui/issues/13394
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <App />,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 

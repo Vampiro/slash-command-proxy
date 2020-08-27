@@ -1,0 +1,13 @@
+.CommandCreator {
+  .command-url-and-copy {
+    align-items: center;
+    display: flex;
+    .command-url {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+    .copy-wrapper {
+      position: relative;
+    }
+  }
+}
