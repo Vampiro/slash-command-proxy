@@ -8,7 +8,7 @@ import {
 // to run a single test: npm test -- -t "get variables"
 
 const variableCollection: VariableCollection = {
-  args: ["20"],
+  args: ["20", "40", "60"],
   client: {
     channel_id: "abc123",
     channel_name: "Town Hall",
@@ -20,7 +20,7 @@ const variableCollection: VariableCollection = {
     token: "de3de3deqd",
     trigger_id: "ffffff",
     user_id: "ppppppp",
-    user_name: "raauld",
+    user_name: "tester",
   },
   res: {
     result: { abc: ["hello", "world"] },
@@ -40,20 +40,11 @@ test("get variables", () => {
   expect(variables.has("client.user_name")).toBe(true);
 });
 
-test("get variable value", () => {
-  expect(getVariableValue("client.user_name", variableCollection)).toBe(
-    "raauld"
-  );
-  expect(getVariableValue("res.result.abc[1]", variableCollection)).toBe(
-    "world"
-  );
-});
-
 test("replacing variables", () => {
   const outputTemplateString =
     "Hello, ${client.user_name}, your answer is ${res.answer}.";
   const output = replaceVariables(outputTemplateString, variableCollection);
-  expect(output).toBe("Hello, raauld, your answer is 42.");
+  expect(output).toBe("Hello, tester, your answer is 42.");
 
   const outputTemplateString2 =
     "Hello, ${client.user_name12}, your answer is ${res.answer}.";
@@ -65,5 +56,29 @@ test("replacing variables", () => {
   const outputTemplateString3 =
     "${res.result.abc[0]} ${client.user_name}, your answer is ${res.answer}.";
   const output3 = replaceVariables(outputTemplateString3, variableCollection);
-  expect(output3).toBe("hello raauld, your answer is 42.");
+  expect(output3).toBe("hello tester, your answer is 42.");
+
+  const outputTemplateString4 = "Your first arg was ${args[0]}";
+  const output4 = replaceVariables(outputTemplateString4, variableCollection);
+  expect(output4).toBe("Your first arg was 20");
+});
+
+test("get variable value vm", () => {
+  expect(getVariableValue("args[0]", variableCollection)).toBe("20");
+  expect(getVariableValue("client.user_name", variableCollection)).toBe(
+    "tester"
+  );
+  expect(getVariableValue("res.result.abc[1]", variableCollection)).toBe(
+    "world"
+  );
+  expect(getVariableValue("args.join(' ')", variableCollection)).toBe(
+    "20 40 60"
+  );
+
+  expect(
+    getVariableValue(
+      'args.map((arg) => `arg=${arg}`).join(" ")',
+      variableCollection
+    )
+  ).toBe("arg=20 arg=40 arg=60");
 });

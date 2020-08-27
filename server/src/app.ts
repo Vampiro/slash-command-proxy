@@ -41,11 +41,19 @@ router.get("/proxy", async (ctx, next) => {
     const extResponse = await axios.get(destUrl);
     vc.res = extResponse.data;
 
-    // if user provided output template, replace variables
-    // else, just give them back the entire response
-    response.text = outputTemplate
-      ? replaceVariables(outputTemplate, vc)
-      : vc.res;
+    if (outputTemplate) {
+      try {
+        response.text = replaceVariables(outputTemplate, vc);
+      } catch (error) {
+        response.text = `Encountered error while replacing variables: ${error}`;
+      }
+    } else {
+      if (typeof vc.res === "string") {
+        response.text = vc.res;
+      } else {
+        response.text = JSON.stringify(vc.res);
+      }
+    }
   } catch (error) {
     response.text = `Encountered error from destination server: ${error}`;
   }

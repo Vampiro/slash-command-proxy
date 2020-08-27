@@ -1,3 +1,5 @@
+import { VM } from "vm2";
+
 export type VariableCollection = {
   args: string[];
   client: {
@@ -18,12 +20,17 @@ export type VariableCollection = {
 
 // takes a string like "Hello, ${client.user_name}, your answer is ${res.answer}."
 // replaces variables found with appropriate values.
+// can throw an error when trying to replace
 export function replaceVariables(str: string, vc: VariableCollection) {
   const variablesUsed = getVariables(str);
 
   variablesUsed.forEach((variable) => {
     let value = getVariableValue(variable, vc);
     value ??= `\${${variable} is undefined}`;
+
+    if (value instanceof Object) {
+      value = JSON.stringify(value);
+    }
 
     str = str.replace(`\${${variable}}`, value);
   });
@@ -45,36 +52,16 @@ export function getVariables(str: string): Set<string> {
   return variableSet;
 }
 
-// given a variable string such as res.result.abc[0].def, will retrieve the value
-// of this out of the variable collection
+// can throw exception if something goes wrong trying to find variable
 export function getVariableValue(variable: string, vc: VariableCollection) {
-  const variableParts = variable.split(".");
-  let parentObject: any = vc;
+  const { args, client, res } = vc;
 
-  for (let i = 0; i < variableParts.length && parentObject !== undefined; i++) {
-    let val: any;
-    const kp = variableParts[i];
+  const vm = new VM({
+    timeout: 1000,
+  });
 
-    // check for array brackets
-    const arrIndexRegex = /\[([0-9]+)\]/;
-    const arrRegexMatch = kp.match(arrIndexRegex);
-    if (arrRegexMatch !== null) {
-      const attr = kp.split("[")[0];
-      const arrIndex = Number(arrRegexMatch[1]);
-      if (
-        parentObject[attr] !== undefined &&
-        parentObject[attr] instanceof Array &&
-        parentObject[attr].length > arrIndex
-      ) {
-        val = parentObject[attr][arrIndex];
-      }
-    } else if (parentObject[kp] !== undefined) {
-      val = parentObject[kp];
-    }
-
-    parentObject = val;
-  }
-
-  // at the end of the loop, parent object becomes the final value, or, if it is not found, undefined
-  return parentObject;
+  return vm.run(`const args = ${JSON.stringify(args)};
+    const client = ${JSON.stringify(client)};
+    const res = ${JSON.stringify(res)};
+    ${variable}`);
 }
