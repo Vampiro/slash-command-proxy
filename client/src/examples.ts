@@ -23,7 +23,7 @@ export default [
     title: "Dictionary",
     proxiedUrl: "https://owlbot.info/api/v2/dictionary/${args[0]}?format=json",
     outputTemplate:
-      "**${args[0]}** type: *${res[0].type}* ${res[0].definition}",
-    args: "awesome",
+      '**${args[0]}**\n${res.map((word, i) => `${i + 1}. *${word.type}* ${word.definition}`).join("\\n")}',
+    args: "great",
   },
 ];
