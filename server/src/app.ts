@@ -44,11 +44,7 @@ router.get("/proxy", async (ctx, next) => {
         response.text = `Encountered error while replacing variables: ${error}`;
       }
     } else {
-      if (typeof vc.res === "string") {
-        response.text = vc.res;
-      } else {
-        response.text = JSON.stringify(vc.res);
-      }
+      response.text = vc.res;
     }
   } catch (error) {
     response.text = `Encountered error from destination server: ${error}`;

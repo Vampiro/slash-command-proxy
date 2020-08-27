@@ -83,7 +83,7 @@ test("replacing variables", () => {
   );
 });
 
-test("get variable value vm", () => {
+test("get variable value", () => {
   expect(getVariableValue("args[0]", variableCollection)).toBe("20");
   expect(getVariableValue("client.user_name", variableCollection)).toBe(
     "tester"

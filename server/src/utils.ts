@@ -1,25 +1,5 @@
 import { VM } from "vm2";
 
-// takes a string like "Hello, ${client.user_name}, your answer is ${res.answer}."
-// replaces variables found with appropriate values.
-// can throw an error when trying to replace
-export function replaceVariables(str: string, vc: VariableCollection) {
-  const variablesUsed = getVariables(str);
-
-  variablesUsed.forEach((variable) => {
-    let value = getVariableValue(variable, vc);
-    value ??= `\${${variable} is undefined}`;
-
-    if (value instanceof Object) {
-      value = JSON.stringify(value);
-    }
-
-    str = str.replace(`\${${variable}}`, value);
-  });
-
-  return str;
-}
-
 export function getVariables(str: string): string[] {
   const variables: string[] = [];
 
@@ -69,4 +49,24 @@ export function getVariableValue(variable: string, vc: VariableCollection) {
     const client = ${JSON.stringify(client)};
     const res = ${JSON.stringify(res)};
     ${variable}`);
+}
+
+// takes a string like "Hello, ${client.user_name}, your answer is ${res.answer}."
+// replaces variables found with appropriate values.
+// can throw an error when trying to replace
+export function replaceVariables(str: string, vc: VariableCollection) {
+  const variablesUsed = getVariables(str);
+
+  variablesUsed.forEach((variable) => {
+    let value = getVariableValue(variable, vc);
+    value ??= `\${${variable} is undefined}`;
+
+    if (value instanceof Object) {
+      value = JSON.stringify(value);
+    }
+
+    str = str.replace(`\${${variable}}`, value);
+  });
+
+  return str;
 }
