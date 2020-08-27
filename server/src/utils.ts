@@ -1,4 +1,4 @@
-export type KeywordCollection = {
+export type VariableCollection = {
   args: string[];
   client: {
     channel_id: string;
@@ -17,44 +17,43 @@ export type KeywordCollection = {
 };
 
 // takes a string like "Hello, ${client.user_name}, your answer is ${res.answer}."
-// replaces keywords found with appropriate values.
-export function replaceKeywords(str: string, kc: KeywordCollection) {
-  const keywordsUsed = getKeywords(str);
+// replaces variables found with appropriate values.
+export function replaceVariables(str: string, vc: VariableCollection) {
+  const variablesUsed = getVariables(str);
 
-  keywordsUsed.forEach((keyword) => {
-    let value = getKeywordValue(keyword, kc);
-    value ??= `\${${keyword} is undefined}`;
+  variablesUsed.forEach((variable) => {
+    let value = getVariableValue(variable, vc);
+    value ??= `\${${variable} is undefined}`;
 
-    str = str.replace(`\${${keyword}}`, value);
+    str = str.replace(`\${${variable}}`, value);
   });
 
   return str;
 }
 
-export function getKeywords(str: string): Set<string> {
-  const keywordSet = new Set<string>();
+export function getVariables(str: string): Set<string> {
+  const variableSet = new Set<string>();
 
   // creates two groups, (prefix).(attr)
   const regex = /\${([a-z0-9\[\]\._\-]+)}/gi;
 
   let matches: string[];
   while ((matches = regex.exec(str))) {
-    const keyword = matches[1];
-    keywordSet.add(matches[1]); // add the keyword
+    variableSet.add(matches[1]); // add the variable
   }
 
-  return keywordSet;
+  return variableSet;
 }
 
-// given a keyword string such as res.result.abc[0].def, will retrieve the value
-// of this out of the keyword collection
-export function getKeywordValue(keyword: string, kc: KeywordCollection) {
-  const keywordParts = keyword.split(".");
-  let parentObject: any = kc;
+// given a variable string such as res.result.abc[0].def, will retrieve the value
+// of this out of the variable collection
+export function getVariableValue(variable: string, vc: VariableCollection) {
+  const variableParts = variable.split(".");
+  let parentObject: any = vc;
 
-  for (let i = 0; i < keywordParts.length && parentObject !== undefined; i++) {
+  for (let i = 0; i < variableParts.length && parentObject !== undefined; i++) {
     let val: any;
-    const kp = keywordParts[i];
+    const kp = variableParts[i];
 
     // check for array brackets
     const arrIndexRegex = /\[([0-9]+)\]/;

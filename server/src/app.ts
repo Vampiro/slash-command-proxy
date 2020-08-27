@@ -3,7 +3,7 @@ import * as KoaRouter from "@koa/router";
 import * as KoaStatic from "koa-static";
 import * as KoaCors from "@koa/cors";
 import axios from "axios";
-import { KeywordCollection, replaceKeywords } from "./utils";
+import { VariableCollection, replaceVariables } from "./utils";
 
 const app = new Koa();
 app.use(KoaCors());
@@ -15,7 +15,7 @@ type ProxyResponse = {
 };
 
 router.get("/proxy", async (ctx, next) => {
-  const kc: KeywordCollection = {
+  const vc: VariableCollection = {
     args: ctx.query.text ? ctx.query.text.split(" ") : [],
     client: {
       channel_id: ctx.query.channel_id,
@@ -34,18 +34,18 @@ router.get("/proxy", async (ctx, next) => {
   };
 
   let response: ProxyResponse = { text: "" };
-  const destUrl = replaceKeywords(ctx.query["prx.url"], kc);
+  const destUrl = replaceVariables(ctx.query["prx.url"], vc);
   const outputTemplate = ctx.query["prx.output"];
 
   try {
     const extResponse = await axios.get(destUrl);
-    kc.res = extResponse.data;
+    vc.res = extResponse.data;
 
-    // if user provided output template, replace keywords
+    // if user provided output template, replace variables
     // else, just give them back the entire response
     response.text = outputTemplate
-      ? replaceKeywords(outputTemplate, kc)
-      : kc.res;
+      ? replaceVariables(outputTemplate, vc)
+      : vc.res;
   } catch (error) {
     response.text = `Encountered error from destination server: ${error}`;
   }
