@@ -32,10 +32,6 @@ export function createCommandUrlForTest(
     .map((key) => `${key}=${encodeURIComponent(additionalFields[key])}`)
     .join("&");
 
-  console.log(
-    `${createCommandUrl(proxiedUrl, outputTemplate)}&${additionalFieldsStr}`
-  );
-
   return `${createCommandUrl(
     proxiedUrl,
     outputTemplate
