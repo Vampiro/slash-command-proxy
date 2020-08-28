@@ -38,7 +38,7 @@ function CommandCreatorPage() {
 
   return (
     <Grid className="CommandCreatorPage" container justify="center">
-      <Grid className="col" item xs={12} sm={9} md={7} lg={6}>
+      <Grid className="col" item xs={12} sm={8} md={7} lg={6}>
         <Card>
           <CardHeader title="Command Creator" />
           <CardContent>
@@ -62,7 +62,7 @@ function CommandCreatorPage() {
           </CardContent>
         </Card>
       </Grid>
-      <Grid className="col" item xs={12} sm={3} md={4} lg={3}>
+      <Grid className="col" item xs={12} sm={4} md={4} lg={3}>
         <Card>
           <CardHeader title="Example Commands" />
           <CardContent>
