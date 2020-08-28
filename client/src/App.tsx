@@ -1,10 +1,11 @@
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CommandCreatorPage from "./pages/CommandCreatorPage";
 import UserDocsPage from "./pages/UserDocsPage";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import "./App.scss";
 
 const theme = createMuiTheme({
@@ -32,9 +33,18 @@ function App() {
                   Slash Command Proxy
                 </Link>
               </Typography>
-              <Link to="/help">
-                <HelpOutlineIcon></HelpOutlineIcon>
-              </Link>
+              <div className="right-nav">
+                <a
+                  href="https://github.com/vampiro/slash-command-proxy"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <GitHubIcon></GitHubIcon>
+                </a>
+                <Link to="/help">
+                  <HelpOutlineIcon></HelpOutlineIcon>
+                </Link>
+              </div>
             </Toolbar>
           </AppBar>
           <div className="main-content">

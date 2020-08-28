@@ -17,6 +17,14 @@
       height: 24px;
       margin-right: 8px;
     }
+
+    .right-nav {
+      display: flex;
+
+      a:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
   }
 
   .main-content {
