@@ -4,7 +4,6 @@ import React, { ChangeEvent, useEffect, useState, KeyboardEvent } from "react";
 import { createCommandUrlForTest } from "../Utils";
 import CallMadeIcon from "@material-ui/icons/CallMade";
 import { makeStyles } from "@material-ui/core/styles";
-import { indigo } from "@material-ui/core/colors";
 import marked from "marked";
 import "./CommandTest.scss";
 
@@ -13,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   fabProgress: {
-    color: indigo[500],
     left: -3,
     pointerEvents: "none",
     position: "absolute",

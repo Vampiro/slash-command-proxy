@@ -1,6 +1,5 @@
 .App {
   $nav-bar-height: 48px;
-  height: 100vh;
 
   .nav-bar {
     min-height: $nav-bar-height;
@@ -8,9 +7,20 @@
     justify-content: space-between;
 
     a {
+      align-items: center;
       color: white;
+      display: flex;
       text-decoration: none;
     }
+
+    img.logo {
+      height: 24px;
+      margin-right: 8px;
+    }
+  }
+
+  .main-content {
+    margin-top: $nav-bar-height;
   }
 
   .MuiCardHeader-root {
