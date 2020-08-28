@@ -3,14 +3,6 @@ import React from "react";
 import examples from "../examples";
 import "./CommandTest.scss";
 
-type ExampleListProps = {
-  onExampleSelect?: (
-    destUrl: string,
-    outputTemplate: string,
-    args: string
-  ) => void;
-};
-
 function ExampleList(props: ExampleListProps) {
   const handleExampleClick = (index: number) => {
     if (props.onExampleSelect) {

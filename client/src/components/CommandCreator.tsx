@@ -91,11 +91,4 @@ function CommandCreator(props: CommandCreatorProps) {
   );
 }
 
-type CommandCreatorProps = {
-  onOutputTemplateChange?: (outputTemplate: string) => void;
-  onDestUrlChange?: (destUrl: string) => void;
-  outputTemplate: string;
-  destUrl: string;
-};
-
 export default CommandCreator;

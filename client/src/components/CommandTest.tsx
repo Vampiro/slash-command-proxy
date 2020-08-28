@@ -8,13 +8,6 @@ import { indigo } from "@material-ui/core/colors";
 import marked from "marked";
 import "./CommandTest.scss";
 
-type CommandTestProps = {
-  args: string;
-  onArgsChange?: (args: string) => void;
-  outputTemplate: string;
-  destUrl: string;
-};
-
 const useStyles = makeStyles((theme) => ({
   buttonWrapper: {
     position: "relative",
