@@ -124,10 +124,9 @@ and turn it into something useful to see in chat:
 
 **great**<br/>
 _/ɡreɪt/_
-
 _(adjective)_
 
-<ol>
+<ol style="margin-top: -10px;">
   <li>Of an extent, amount, or intensity considerably above the normal or average.</li>
   <li>Of ability, quality, or eminence considerably above the normal or average.</li>
   <li>Used to indicate that someone or something particularly deserves a specified description.</li>
@@ -137,14 +136,14 @@ _(adjective)_
 
 _(noun)_
 
-<ol>
+<ol style="margin-top: -10px;">
   <li>An important or distinguished person.</li>
   <li>another term for Literae Humaniores</li>
 </ol>
 
 _(adverb)_
 
-<ol>
+<ol style="margin-top: -10px;">
   <li>Excellently; very well.</li>
 </ol>
 

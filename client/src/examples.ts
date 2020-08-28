@@ -8,7 +8,7 @@ export default [
     args: "20",
   },
   {
-    title: "Ask the magic 8-ball",
+    title: "Magic 8-ball",
     destUrl: "https://8ball.delegator.com/magic/JSON/Question",
     outputTemplate: "${res.magic.answer}",
     args: "",
@@ -23,7 +23,7 @@ export default [
     title: "Dictionary",
     destUrl: "https://api.dictionaryapi.dev/api/v1/entries/en/${args[0]}",
     outputTemplate:
-      '**${args[0]}**\n*${res[0].phonetics[0].text}*\n\n${Object.entries(res[0].meaning)\n  .map(([type, definitions]) =>\n    `_(${type})_\\n\\n${definitions.map((d, i) => (i + 1) + ". " + d.definition)\n      .join("\\n")}`)\n    .join("\\n\\n")}',
+      '**${args[0]}**\n*${res[0].phonetics[0].text}*\n\n${Object.entries(res[0].meaning)\n  .map(([type, definitions]) =>\n    `_(${type})_\\n${definitions.map((d, i) => (i + 1) + ". " + d.definition)\n      .join("\\n")}`)\n    .join("\\n\\n")}',
     args: "great",
   },
 ];
