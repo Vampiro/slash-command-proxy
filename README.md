@@ -1,4 +1,4 @@
-# <img align="right" src="./client/public/logo32.png" style="margin-top:4px"> Slash Command Proxy
+# Slash Command Proxy
 
 Proxies Slash Commands from [Slack](https://slack.com/) and [Mattermost](https://mattermost.com/) and formulates useful responses.
 
@@ -10,7 +10,7 @@ Usage documentation is hosted in the [app](https://slash-command-proxy.herokuapp
 
 ### Environment variables
 
-`PORT` (optional) is the port the server will run on.
+`PORT` (optional) is the port the server will run on. Defaults to 80.
 
 ### Building & running the docker container
 
