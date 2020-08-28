@@ -1,4 +1,4 @@
-# Slash Command Proxy &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Vampiro/slash-command-proxy/blob/master/LICENSE) ![Heroku](https://github.com/Vampiro/slash-command-proxy/workflows/Deploy%20to%20Heroku/badge.svg)
+# Slash Command Proxy &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Vampiro/slash-command-proxy/blob/master/LICENSE) ![deploy](https://github.com/Vampiro/slash-command-proxy/workflows/deploy/badge.svg)
 
 Proxies Slash Commands from [Slack](https://slack.com/) and [Mattermost](https://mattermost.com/) and formulates useful responses.
 
