@@ -1,12 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Fab,
-  SvgIcon,
-  TextField,
-  Tooltip,
-} from "@material-ui/core";
+import { Fab, SvgIcon, TextField, Tooltip } from "@material-ui/core";
 import React, { ChangeEvent, useState } from "react";
 import { createCommandUrl } from "../Utils";
 import { mdiContentCopy } from "@mdi/js";
@@ -30,9 +22,12 @@ function CommandCreator(props: CommandCreatorProps) {
     }
   };
 
+  // when copy button is clicked
   const handleCopyClick = () => {
+    // copy Command Url to the user's clipboard
     copyToClipboard(createCommandUrl(props.destUrl, props.outputTemplate));
     if (!copyTooltipOpen) {
+      // show tooltip for x seconds
       setCopyTooltipOpen(true);
       setTimeout(() => {
         setCopyTooltipOpen(false);
@@ -42,61 +37,56 @@ function CommandCreator(props: CommandCreatorProps) {
 
   return (
     <div className="CommandCreator">
-      <Card>
-        <CardHeader title="Command Creator" />
-        <CardContent>
-          <TextField
-            fullWidth
-            label="Destination URL"
-            multiline
-            onChange={handleDestUrlChange}
-            size="small"
-            value={props.destUrl}
-            variant="outlined"
-          ></TextField>
-          <TextField
-            fullWidth
-            label="Output Template"
-            multiline
-            onChange={handleOutputTemplateChange}
-            size="small"
-            value={props.outputTemplate}
-            variant="outlined"
-          ></TextField>
-          <div className="command-url-and-copy">
-            <TextField
-              className="command-url"
-              disabled
-              fullWidth
-              label="Command URL"
-              multiline
-              rowsMax={5}
+      <TextField
+        fullWidth
+        label="Destination URL"
+        multiline
+        onChange={handleDestUrlChange}
+        size="small"
+        value={props.destUrl}
+        variant="outlined"
+      ></TextField>
+      <TextField
+        fullWidth
+        label="Output Template"
+        multiline
+        onChange={handleOutputTemplateChange}
+        size="small"
+        value={props.outputTemplate}
+        variant="outlined"
+      ></TextField>
+      <div className="command-url-and-copy">
+        <TextField
+          className="command-url"
+          disabled
+          fullWidth
+          label="Command URL"
+          multiline
+          rowsMax={5}
+          size="small"
+          value={createCommandUrl(props.destUrl, props.outputTemplate)}
+          variant="outlined"
+        ></TextField>
+        <div className="copy-wrapper">
+          <Tooltip
+            open={copyTooltipOpen}
+            title="Command URL copied to clipboard"
+          >
+            <Fab
+              aria-label="Test"
+              color="primary"
+              onClick={() => {
+                handleCopyClick();
+              }}
               size="small"
-              value={createCommandUrl(props.destUrl, props.outputTemplate)}
-              variant="outlined"
-            ></TextField>
-            <div className="copy-wrapper">
-              <Tooltip
-                open={copyTooltipOpen}
-                title="Command URL copied to clipboard"
-              >
-                <Fab
-                  aria-label="Test"
-                  color="primary"
-                  onClick={() => {
-                    handleCopyClick();
-                  }}
-                  size="small"
-                >
-                  <SvgIcon>
-                    <path d={mdiContentCopy}></path>
-                  </SvgIcon>
-                </Fab>
-              </Tooltip>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+            >
+              <SvgIcon>
+                <path d={mdiContentCopy}></path>
+              </SvgIcon>
+            </Fab>
+          </Tooltip>
+        </div>
+      </div>
     </div>
   );
 }

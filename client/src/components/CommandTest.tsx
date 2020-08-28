@@ -1,12 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CircularProgress,
-  Fab,
-  Grid,
-  TextField,
-} from "@material-ui/core";
+import { CircularProgress, Fab, Grid, TextField } from "@material-ui/core";
 import Axios from "axios";
 import React, { ChangeEvent, useEffect, useState, KeyboardEvent } from "react";
 import { createCommandUrlForTest } from "../Utils";
@@ -39,9 +31,10 @@ const useStyles = makeStyles((theme) => ({
 
 function CommandTest(props: CommandTestProps) {
   const classes = useStyles();
-  const [testResult, setTestResult] = useState<string>("");
   const [loading, setLoading] = React.useState(false);
+  const [testResult, setTestResult] = useState<string>("");
 
+  // whenever any props are changed, blank out test result
   useEffect(() => {
     setTestResult("");
   }, [props]);
@@ -74,46 +67,41 @@ function CommandTest(props: CommandTestProps) {
 
   return (
     <div className="CommandTest">
-      <Card>
-        <CardHeader title="Test Command" />
-        <CardContent>
-          <Grid alignItems="center" container>
-            <Grid item className="args-wrapper">
-              <TextField
-                fullWidth
-                label="Command Args"
-                onChange={handleArgsChange}
-                onKeyDown={handleKeyDown}
-                size="small"
-                value={props.args}
-                variant="outlined"
-              ></TextField>
-            </Grid>
-            <Grid item>
-              <div className={classes.buttonWrapper}>
-                <Fab
-                  aria-label="go"
-                  color="primary"
-                  onClick={() => {
-                    handleGoClick();
-                  }}
-                  size="small"
-                >
-                  <CallMadeIcon></CallMadeIcon>
-                </Fab>
-                {loading && (
-                  <CircularProgress size={45} className={classes.fabProgress} />
-                )}
-              </div>
-            </Grid>
-          </Grid>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: marked(testResult.replace(/(\r\n|\n|\r)/g, "<br />")),
-            }}
-          ></div>
-        </CardContent>
-      </Card>
+      <Grid alignItems="center" container>
+        <Grid item className="args-wrapper">
+          <TextField
+            fullWidth
+            label="Command Args"
+            onChange={handleArgsChange}
+            onKeyDown={handleKeyDown}
+            size="small"
+            value={props.args}
+            variant="outlined"
+          ></TextField>
+        </Grid>
+        <Grid item>
+          <div className={classes.buttonWrapper}>
+            <Fab
+              aria-label="go"
+              color="primary"
+              onClick={() => {
+                handleGoClick();
+              }}
+              size="small"
+            >
+              <CallMadeIcon></CallMadeIcon>
+            </Fab>
+            {loading && (
+              <CircularProgress size={45} className={classes.fabProgress} />
+            )}
+          </div>
+        </Grid>
+      </Grid>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: marked(testResult.replace(/(\r\n|\n|\r)/g, "<br />")),
+        }}
+      ></div>
     </div>
   );
 }

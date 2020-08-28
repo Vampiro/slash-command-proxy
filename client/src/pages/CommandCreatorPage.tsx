@@ -1,4 +1,4 @@
-import { Container } from "@material-ui/core";
+import { Card, CardContent, CardHeader, Container } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import CommandCreator from "../components/CommandCreator";
 import CommandTest from "../components/CommandTest";
@@ -40,23 +40,38 @@ function CommandCreatorPage() {
     <Container maxWidth="xl">
       <div className="CommandCreatorPage">
         <div className="left-col">
-          <CommandCreator
-            onOutputTemplateChange={handleOutputTemplateChange}
-            onDestUrlChange={handleDestUrlChange}
-            outputTemplate={outputTemplate}
-            destUrl={destUrl}
-          ></CommandCreator>
+          <Card>
+            <CardHeader title="Command Creator" />
+            <CardContent>
+              <CommandCreator
+                onOutputTemplateChange={handleOutputTemplateChange}
+                onDestUrlChange={handleDestUrlChange}
+                outputTemplate={outputTemplate}
+                destUrl={destUrl}
+              ></CommandCreator>
+            </CardContent>
+          </Card>
           <div className="command-test-wrapper">
-            <CommandTest
-              args={args}
-              onArgsChange={handleArgsChange}
-              outputTemplate={outputTemplate}
-              destUrl={destUrl}
-            ></CommandTest>
+            <Card>
+              <CardHeader title="Test Command" />
+              <CardContent>
+                <CommandTest
+                  args={args}
+                  onArgsChange={handleArgsChange}
+                  outputTemplate={outputTemplate}
+                  destUrl={destUrl}
+                ></CommandTest>
+              </CardContent>
+            </Card>
           </div>
         </div>
         <div className="right-col">
-          <ExampleList onExampleSelect={handleExampleSelect}></ExampleList>
+          <Card>
+            <CardHeader title="Example Commands" />
+            <CardContent>
+              <ExampleList onExampleSelect={handleExampleSelect}></ExampleList>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </Container>

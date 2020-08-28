@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  List,
-  ListItem,
-} from "@material-ui/core";
+import { List, ListItem } from "@material-ui/core";
 import React from "react";
 import examples from "../examples";
 import "./CommandTest.scss";
@@ -39,16 +33,8 @@ function ExampleList(props: ExampleListProps) {
       {example.title}
     </ListItem>
   ));
-  return (
-    <div className="CommandTest">
-      <Card>
-        <CardHeader title="Example Commands" />
-        <CardContent>
-          <List>{listItems}</List>
-        </CardContent>
-      </Card>
-    </div>
-  );
+
+  return <List>{listItems}</List>;
 }
 
 export default ExampleList;
