@@ -89,7 +89,7 @@ Variables are available for formulating the **Destination URL** and/or the **Out
 
 ${Object.entries(res[0].meaning)
   .map(([type, definitions]) =>
-    `*(${type})*\n\n${definitions.map((d, i) => (i + 1) + ". " + d.definition)
+    `_(${type})_\n\n${definitions.map((d, i) => (i + 1) + ". " + d.definition)
       .join("\n")}`)
     .join("\n\n")}
 ```
