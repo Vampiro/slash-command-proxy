@@ -20,7 +20,7 @@ type CommandTestProps = {
   args: string;
   onArgsChange?: (args: string) => void;
   outputTemplate: string;
-  proxiedUrl: string;
+  destUrl: string;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -63,11 +63,7 @@ function CommandTest(props: CommandTestProps) {
     setLoading(true);
     try {
       const response = await Axios.get(
-        createCommandUrlForTest(
-          props.proxiedUrl,
-          props.outputTemplate,
-          props.args
-        )
+        createCommandUrlForTest(props.destUrl, props.outputTemplate, props.args)
       );
       setTestResult(response.data.text);
     } catch (error) {

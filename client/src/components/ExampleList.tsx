@@ -11,7 +11,7 @@ import "./CommandTest.scss";
 
 type ExampleListProps = {
   onExampleSelect?: (
-    proxiedUrl: string,
+    destUrl: string,
     outputTemplate: string,
     args: string
   ) => void;
@@ -21,7 +21,7 @@ function ExampleList(props: ExampleListProps) {
   const handleExampleClick = (index: number) => {
     if (props.onExampleSelect) {
       props.onExampleSelect(
-        examples[index].proxiedUrl,
+        examples[index].destUrl,
         examples[index].outputTemplate,
         examples[index].args
       );

@@ -8,7 +8,7 @@ import "./CommandCreatorPage.scss";
 function CommandCreatorPage() {
   const [args, setArgs] = useState<string>("");
   const [outputTemplate, setOutputTemplate] = useState<string>("");
-  const [proxiedUrl, setProxiedUrl] = useState<string>("");
+  const [destUrl, setDestUrl] = useState<string>("");
 
   useEffect(() => {
     document.title = "Slash Command Proxy";
@@ -19,21 +19,21 @@ function CommandCreatorPage() {
   };
 
   const handleExampleSelect = (
-    proxiedUrl: string,
+    destUrl: string,
     outputTemplate: string,
     args: string
   ) => {
     setArgs(args);
     setOutputTemplate(outputTemplate);
-    setProxiedUrl(proxiedUrl);
+    setDestUrl(destUrl);
   };
 
   const handleOutputTemplateChange = (outputTemplate: string) => {
     setOutputTemplate(outputTemplate);
   };
 
-  const handleProxiedUrlChange = (proxiedUrl: string) => {
-    setProxiedUrl(proxiedUrl);
+  const handleDestUrlChange = (destUrl: string) => {
+    setDestUrl(destUrl);
   };
 
   return (
@@ -42,16 +42,16 @@ function CommandCreatorPage() {
         <div className="left-col">
           <CommandCreator
             onOutputTemplateChange={handleOutputTemplateChange}
-            onProxiedUrlChange={handleProxiedUrlChange}
+            onDestUrlChange={handleDestUrlChange}
             outputTemplate={outputTemplate}
-            proxiedUrl={proxiedUrl}
+            destUrl={destUrl}
           ></CommandCreator>
           <div className="command-test-wrapper">
             <CommandTest
               args={args}
               onArgsChange={handleArgsChange}
               outputTemplate={outputTemplate}
-              proxiedUrl={proxiedUrl}
+              destUrl={destUrl}
             ></CommandTest>
           </div>
         </div>

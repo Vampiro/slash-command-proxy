@@ -1,16 +1,16 @@
 const proxyUrl = "https://slash-command-proxy.herokuapp.com/proxy";
 // const proxyUrl = "http://localhost/proxy";
 
-export function createCommandUrl(proxiedUrl: string, outputTemplate?: string) {
+export function createCommandUrl(destUrl: string, outputTemplate?: string) {
   let outputParam =
     outputTemplate === undefined
       ? ""
       : `&prx.output=${encodeURIComponent(outputTemplate)}`;
-  return `${proxyUrl}?prx.url=${encodeURIComponent(proxiedUrl)}${outputParam}`;
+  return `${proxyUrl}?prx.url=${encodeURIComponent(destUrl)}${outputParam}`;
 }
 
 export function createCommandUrlForTest(
-  proxiedUrl: string,
+  destUrl: string,
   outputTemplate?: string,
   args: string = ""
 ) {
@@ -32,8 +32,5 @@ export function createCommandUrlForTest(
     .map((key) => `${key}=${encodeURIComponent(additionalFields[key])}`)
     .join("&");
 
-  return `${createCommandUrl(
-    proxiedUrl,
-    outputTemplate
-  )}&${additionalFieldsStr}`;
+  return `${createCommandUrl(destUrl, outputTemplate)}&${additionalFieldsStr}`;
 }

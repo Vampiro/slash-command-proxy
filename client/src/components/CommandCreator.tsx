@@ -16,10 +16,10 @@ import "./CommandCreator.scss";
 function CommandCreator(props: CommandCreatorProps) {
   const [copyTooltipOpen, setCopyTooltipOpen] = useState(false);
 
-  // handler for proxied url text field
-  const handleProxiedUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (props.onProxiedUrlChange) {
-      props.onProxiedUrlChange(event.target.value);
+  // handler for destination url text field
+  const handleDestUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (props.onDestUrlChange) {
+      props.onDestUrlChange(event.target.value);
     }
   };
 
@@ -31,7 +31,7 @@ function CommandCreator(props: CommandCreatorProps) {
   };
 
   const handleCopyClick = () => {
-    copyToClipboard(createCommandUrl(props.proxiedUrl, props.outputTemplate));
+    copyToClipboard(createCommandUrl(props.destUrl, props.outputTemplate));
     if (!copyTooltipOpen) {
       setCopyTooltipOpen(true);
       setTimeout(() => {
@@ -47,11 +47,11 @@ function CommandCreator(props: CommandCreatorProps) {
         <CardContent>
           <TextField
             fullWidth
-            label="Proxied URL"
+            label="Destination URL"
             multiline
-            onChange={handleProxiedUrlChange}
+            onChange={handleDestUrlChange}
             size="small"
-            value={props.proxiedUrl}
+            value={props.destUrl}
             variant="outlined"
           ></TextField>
           <TextField
@@ -71,7 +71,7 @@ function CommandCreator(props: CommandCreatorProps) {
               label="Command URL"
               multiline
               size="small"
-              value={createCommandUrl(props.proxiedUrl, props.outputTemplate)}
+              value={createCommandUrl(props.destUrl, props.outputTemplate)}
               variant="outlined"
             ></TextField>
             <div className="copy-wrapper">
@@ -102,9 +102,9 @@ function CommandCreator(props: CommandCreatorProps) {
 
 type CommandCreatorProps = {
   onOutputTemplateChange?: (outputTemplate: string) => void;
-  onProxiedUrlChange?: (proxiedUrl: string) => void;
+  onDestUrlChange?: (destUrl: string) => void;
   outputTemplate: string;
-  proxiedUrl: string;
+  destUrl: string;
 };
 
 export default CommandCreator;
