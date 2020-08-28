@@ -70,6 +70,7 @@ function CommandCreator(props: CommandCreatorProps) {
               fullWidth
               label="Command URL"
               multiline
+              rowsMax={5}
               size="small"
               value={createCommandUrl(props.destUrl, props.outputTemplate)}
               variant="outlined"
