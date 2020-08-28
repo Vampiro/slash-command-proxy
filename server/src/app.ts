@@ -7,7 +7,6 @@ import axios from "axios";
 import { replaceVariables } from "./utils";
 
 const app = new Koa();
-app.use(KoaCors());
 const router = new KoaRouter();
 const reactBuildDir = "../client/build";
 
@@ -58,6 +57,7 @@ router.get("/proxy", async (ctx, next) => {
   ctx.body = response;
 });
 
+app.use(KoaCors());
 app.use(router.middleware());
 app.use(KoaStatic(reactBuildDir));
 
