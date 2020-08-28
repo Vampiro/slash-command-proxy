@@ -47,8 +47,8 @@ function UserDocsPage() {
   }, []);
 
   return (
-    <Grid className="UserDocs" container>
-      <Grid item xs={11} md={10} lg={8} xl={6}>
+    <Grid className="UserDocsPage" container justify="center">
+      <Grid item xs={12} md={11} lg={7}>
         <div
           className="markdown-body"
           dangerouslySetInnerHTML={{ __html: docHtml }}

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, Container } from "@material-ui/core";
+import { Card, CardContent, CardHeader, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import CommandCreator from "../components/CommandCreator";
 import CommandTest from "../components/CommandTest";
@@ -37,44 +37,42 @@ function CommandCreatorPage() {
   };
 
   return (
-    <Container maxWidth="xl">
-      <div className="CommandCreatorPage">
-        <div className="left-col">
+    <Grid className="CommandCreatorPage" container justify="center">
+      <Grid className="col" item xs={12} sm={9} md={7} lg={6}>
+        <Card>
+          <CardHeader title="Command Creator" />
+          <CardContent>
+            <CommandCreator
+              onOutputTemplateChange={handleOutputTemplateChange}
+              onDestUrlChange={handleDestUrlChange}
+              outputTemplate={outputTemplate}
+              destUrl={destUrl}
+            ></CommandCreator>
+          </CardContent>
+        </Card>
+        <div className="command-test-wrapper">
           <Card>
-            <CardHeader title="Command Creator" />
+            <CardHeader title="Test Command" />
             <CardContent>
-              <CommandCreator
-                onOutputTemplateChange={handleOutputTemplateChange}
-                onDestUrlChange={handleDestUrlChange}
+              <CommandTest
+                args={args}
+                onArgsChange={handleArgsChange}
                 outputTemplate={outputTemplate}
                 destUrl={destUrl}
-              ></CommandCreator>
-            </CardContent>
-          </Card>
-          <div className="command-test-wrapper">
-            <Card>
-              <CardHeader title="Test Command" />
-              <CardContent>
-                <CommandTest
-                  args={args}
-                  onArgsChange={handleArgsChange}
-                  outputTemplate={outputTemplate}
-                  destUrl={destUrl}
-                ></CommandTest>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-        <div className="right-col">
-          <Card>
-            <CardHeader title="Example Commands" />
-            <CardContent>
-              <ExampleList onExampleSelect={handleExampleSelect}></ExampleList>
+              ></CommandTest>
             </CardContent>
           </Card>
         </div>
-      </div>
-    </Container>
+      </Grid>
+      <Grid className="col" item xs={12} sm={3} md={4} lg={3}>
+        <Card>
+          <CardHeader title="Example Commands" />
+          <CardContent>
+            <ExampleList onExampleSelect={handleExampleSelect}></ExampleList>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   );
 }
 

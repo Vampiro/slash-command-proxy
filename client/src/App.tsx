@@ -20,14 +20,12 @@ function App() {
             </Link>
           </Toolbar>
         </AppBar>
-        <div className="main-content">
-          <Route exact path="/">
-            <CommandCreatorPage></CommandCreatorPage>
-          </Route>
-          <Route exact path="/help">
-            <UserDocsPage></UserDocsPage>
-          </Route>
-        </div>
+        <Route exact path="/">
+          <CommandCreatorPage></CommandCreatorPage>
+        </Route>
+        <Route exact path="/help">
+          <UserDocsPage></UserDocsPage>
+        </Route>
       </div>
     </Router>
   );
