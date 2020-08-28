@@ -1,5 +1,5 @@
 import { Container } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommandCreator from "../components/CommandCreator";
 import CommandTest from "../components/CommandTest";
 import ExampleList from "../components/ExampleList";
@@ -9,6 +9,10 @@ function CommandCreatorPage() {
   const [args, setArgs] = useState<string>("");
   const [outputTemplate, setOutputTemplate] = useState<string>("");
   const [proxiedUrl, setProxiedUrl] = useState<string>("");
+
+  useEffect(() => {
+    document.title = "Slash Command Proxy";
+  }, []);
 
   const handleArgsChange = (args: string) => {
     setArgs(args);

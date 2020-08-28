@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Slash Command Proxy",
+  "name": "Slash Command Proxy",
   "icons": [
     {
       "src": "favicon.ico",

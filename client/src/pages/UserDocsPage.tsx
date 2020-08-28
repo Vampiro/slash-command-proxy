@@ -29,8 +29,10 @@ marked.setOptions({
 function UserDocsPage() {
   const [docHtml, setDocHtml] = useState("");
 
-  // fetch UserDocs.md once when this component first loads
   useEffect(() => {
+    document.title = "Documentation";
+
+    // fetch UserDocs.md once when this component first loads
     const fetchMarkdown = async () => {
       try {
         const response = await Axios.get(UserDocsMd);

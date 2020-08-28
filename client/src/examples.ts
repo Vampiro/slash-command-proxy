@@ -19,11 +19,18 @@ export default [
     outputTemplate: "${res.fact}",
     args: "",
   },
+  // {
+  //   title: "Dictionary",
+  //   proxiedUrl: "https://owlbot.info/api/v2/dictionary/${args[0]}?format=json",
+  //   outputTemplate:
+  //     '**${args[0]}**\n${res.map((word, i) => `${i + 1}. *${word.type}* ${word.definition}`).join("\\n")}',
+  //   args: "great",
+  // },
   {
     title: "Dictionary",
-    proxiedUrl: "https://owlbot.info/api/v2/dictionary/${args[0]}?format=json",
+    proxiedUrl: "https://api.dictionaryapi.dev/api/v1/entries/en/${args[0]}",
     outputTemplate:
-      '**${args[0]}**\n${res.map((word, i) => `${i + 1}. *${word.type}* ${word.definition}`).join("\\n")}',
+      '**${args[0]}**\n*${res[0].phonetics[0].text}*\n\n${Object.entries(res[0].meaning)\n  .map(([type, definitions]) =>\n    `*(${type})*\\n\\n${definitions.map((d, i) => (i + 1) + ". " + d.definition)\n      .join("\\n")}`)\n    .join("\\n\\n")}',
     args: "great",
   },
 ];
