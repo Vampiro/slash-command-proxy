@@ -24,6 +24,10 @@
       a:not(:last-child) {
         margin-right: 10px;
       }
+
+      svg:hover {
+        color: paleturquoise;
+      }
     }
   }
 
