@@ -61,6 +61,7 @@ router.get("/proxy", async (ctx, next) => {
 app.use(router.middleware());
 app.use(KoaStatic(reactBuildDir));
 
+// router everything left to index.html where react router will pick it up
 app.use((ctx, next) => {
   ctx.type = "html";
   ctx.body = fs.readFileSync(`${reactBuildDir}/index.html`);
