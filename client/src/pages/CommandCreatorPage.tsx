@@ -43,26 +43,24 @@ function CommandCreatorPage() {
           <CardHeader title="Command Creator" />
           <CardContent>
             <CommandCreator
-              onOutputTemplateChange={handleOutputTemplateChange}
-              onDestUrlChange={handleDestUrlChange}
-              outputTemplate={outputTemplate}
               destUrl={destUrl}
+              onDestUrlChange={handleDestUrlChange}
+              onOutputTemplateChange={handleOutputTemplateChange}
+              outputTemplate={outputTemplate}
             ></CommandCreator>
           </CardContent>
         </Card>
-        <div className="command-test-wrapper">
-          <Card>
-            <CardHeader title="Test Command" />
-            <CardContent>
-              <CommandTest
-                args={args}
-                onArgsChange={handleArgsChange}
-                outputTemplate={outputTemplate}
-                destUrl={destUrl}
-              ></CommandTest>
-            </CardContent>
-          </Card>
-        </div>
+        <Card className="command-test-wrapper">
+          <CardHeader title="Test Command" />
+          <CardContent>
+            <CommandTest
+              args={args}
+              destUrl={destUrl}
+              onArgsChange={handleArgsChange}
+              outputTemplate={outputTemplate}
+            ></CommandTest>
+          </CardContent>
+        </Card>
       </Grid>
       <Grid className="col" item xs={12} sm={3} md={4} lg={3}>
         <Card>
