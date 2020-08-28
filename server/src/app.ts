@@ -2,13 +2,14 @@ import * as Koa from "koa";
 import * as KoaRouter from "@koa/router";
 import * as KoaStatic from "koa-static";
 import * as KoaCors from "@koa/cors";
+import * as fs from "fs";
 import axios from "axios";
 import { replaceVariables } from "./utils";
 
 const app = new Koa();
 app.use(KoaCors());
 const router = new KoaRouter();
-const reactBuildDir = "../client/build/";
+const reactBuildDir = "../client/build";
 
 router.get("/proxy", async (ctx, next) => {
   const vc: VariableCollection = {
@@ -57,7 +58,12 @@ router.get("/proxy", async (ctx, next) => {
   ctx.body = response;
 });
 
-app.use(KoaStatic(reactBuildDir));
 app.use(router.middleware());
+app.use(KoaStatic(reactBuildDir));
+
+app.use((ctx, next) => {
+  ctx.type = "html";
+  ctx.body = fs.readFileSync(`${reactBuildDir}/index.html`);
+});
 
 export default app;
