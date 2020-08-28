@@ -1,5 +1,6 @@
 type ProxyResponse = {
   text: string | Object;
+  response_type?: "in_channel";
 };
 
 type VariableCollection = {

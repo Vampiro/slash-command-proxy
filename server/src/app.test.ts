@@ -19,3 +19,9 @@ test("proxy endpoint", async () => {
   expect(response.type).toBe("application/json");
   expect(response.body.text).toBe("You rolled a 9!");
 });
+
+test("proxy endpoint no destination url", async () => {
+  const response = await request(app.callback()).get("/proxy");
+  expect(response.type).toBe("application/json");
+  expect(response.body.text).toBe("Destination URL required");
+});

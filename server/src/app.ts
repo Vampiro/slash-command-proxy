@@ -11,6 +11,8 @@ const router = new KoaRouter();
 const reactBuildDir = "../client/build";
 
 router.get("/proxy", async (ctx, next) => {
+  console.log(`${new Date()} Received /proxy request.`);
+
   const vc: VariableCollection = {
     args: ctx.query.text ? ctx.query.text.split(" ") : [],
     client: {
@@ -30,28 +32,46 @@ router.get("/proxy", async (ctx, next) => {
   };
 
   let response: ProxyResponse = { text: "" };
-  const destUrl = replaceVariables(ctx.query["prx.url"], vc);
   const outputTemplate = ctx.query["prx.output"];
 
-  try {
-    const extResponse = await axios.get(destUrl);
-    vc.res = extResponse.data;
+  const setResponse = (text: string, isError = false) => {
+    response.text = text;
 
-    if (outputTemplate) {
-      try {
-        response.text = replaceVariables(outputTemplate, vc);
-      } catch (error) {
-        response.text = `Encountered error while replacing variables: ${error}`;
-      }
-    } else {
-      if (typeof vc.res === "string") {
-        response.text = vc.res;
-      } else {
-        response.text = JSON.stringify(vc.res);
-      }
+    // if response_type is undefined, the text is only shown to the executor. if "in_channel", it is shown to all.
+    // so if we're returning an error, just show it to the user (leave response_type undefined).
+    if (!isError) {
+      response.response_type = "in_channel";
     }
-  } catch (error) {
-    response.text = `Encountered error from destination server: ${error}`;
+  };
+
+  if (ctx.query["prx.url"]) {
+    const destUrl = replaceVariables(ctx.query["prx.url"], vc);
+
+    try {
+      const extResponse = await axios.get(destUrl);
+      vc.res = extResponse.data;
+
+      if (outputTemplate) {
+        try {
+          setResponse(replaceVariables(outputTemplate, vc));
+        } catch (error) {
+          setResponse(
+            `Encountered error while replacing variables: ${error}`,
+            true
+          );
+        }
+      } else {
+        if (typeof vc.res === "string") {
+          setResponse(vc.res);
+        } else {
+          setResponse(JSON.stringify(vc.res));
+        }
+      }
+    } catch (error) {
+      setResponse(`Encountered error from destination server: ${error}`, true);
+    }
+  } else {
+    setResponse("Destination URL required", true);
   }
 
   ctx.body = response;
