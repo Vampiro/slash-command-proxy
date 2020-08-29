@@ -1,6 +1,6 @@
-.App {
-  $nav-bar-height: 48px;
+$nav-bar-height: 48px;
 
+.App {
   .nav-bar {
     min-height: $nav-bar-height;
     display: flex;

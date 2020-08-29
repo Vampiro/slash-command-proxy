@@ -1,3 +1,5 @@
+@import "../App.scss";
+
 .CommandTest {
   .args-wrapper {
     flex-grow: 1;
@@ -7,5 +9,10 @@
   p {
     margin-bottom: 4px;
     margin-top: 4px;
+  }
+
+  .test-result {
+    max-height: calc(100vh - #{$nav-bar-height} - 140px);
+    overflow: auto;
   }
 }

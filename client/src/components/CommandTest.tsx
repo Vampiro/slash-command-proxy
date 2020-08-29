@@ -96,10 +96,7 @@ function CommandTest(props: CommandTestProps) {
           timestamp
         );
       } catch (e) {
-        setTestResult(
-          marked(text.replace(/(\r\n|\n|\r)/g, "<br />")),
-          timestamp
-        );
+        setTestResult(marked(text), timestamp);
       }
     } catch (error) {
       setTestResult(`An error occurred: ${error}`, timestamp);
@@ -156,6 +153,7 @@ function CommandTest(props: CommandTestProps) {
         </Grid>
       </Grid>
       <div
+        className="test-result"
         dangerouslySetInnerHTML={{
           __html: testResult.result,
         }}
