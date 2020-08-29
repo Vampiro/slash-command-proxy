@@ -1,3 +1,4 @@
+# deploys application to heroku
 name: deploy
 
 on:
