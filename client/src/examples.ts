@@ -39,7 +39,7 @@ export default [
     destUrl:
       'https://api.magicthegathering.io/v1/cards?name=${encodeURIComponent(args.join(" "))}&pageSize=1',
     outputTemplate:
-      '${res.cards.map((card) =>\n\n`![GitHub Logo](${card.imageUrl})`)\n\n.join("")}',
+      '${res.cards.map((card) =>\n\n`![Card Image](${card.imageUrl})`)\n\n.join("")}',
     args: "Sengir Vampire",
   },
   {
@@ -48,6 +48,12 @@ export default [
       "https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist",
     outputTemplate:
       '${res.type === "single" ? `${res.joke}` : `${res.setup}\n\n*${res.delivery}*`}',
+    args: "",
+  },
+  {
+    title: "Random Dog",
+    destUrl: "https://dog.ceo/api/breeds/image/random",
+    outputTemplate: "![Dog Image](${res.message})",
     args: "",
   },
   {
