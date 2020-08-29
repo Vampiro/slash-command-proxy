@@ -1,11 +1,16 @@
-import { CircularProgress, Fab, Grid, TextField } from "@material-ui/core";
-import Axios from "axios";
 import React, { ChangeEvent, useEffect, useState, KeyboardEvent } from "react";
+import Axios from "axios";
+import { CircularProgress, Fab, Grid, TextField } from "@material-ui/core";
 import { createCommandUrlForTest } from "../Utils";
 import CallMadeIcon from "@material-ui/icons/CallMade";
-import { makeStyles } from "@material-ui/core/styles";
 import marked from "marked";
+import hljs from "highlight.js/lib/core";
+import json from "highlight.js/lib/languages/json";
+import { makeStyles } from "@material-ui/core/styles";
 import "./CommandTest.scss";
+import "highlight.js/styles/github.css";
+
+hljs.registerLanguage("json", json);
 
 const useStyles = makeStyles((theme) => ({
   buttonWrapper: {
@@ -51,7 +56,14 @@ function CommandTest(props: CommandTestProps) {
       const response = await Axios.get(
         createCommandUrlForTest(props.destUrl, props.outputTemplate, props.args)
       );
-      setTestResult(response.data.text);
+      const { text } = response.data;
+      try {
+        const textObj = JSON.parse(text);
+        const objStr = JSON.stringify(textObj, null, 2);
+        setTestResult(`<pre>${hljs.highlight("json", objStr).value}</pre>`);
+      } catch (e) {
+        setTestResult(marked(text.replace(/(\r\n|\n|\r)/g, "<br />")));
+      }
     } catch (error) {
       setTestResult(`An error occurred: ${error}`);
     }
@@ -95,7 +107,7 @@ function CommandTest(props: CommandTestProps) {
       </Grid>
       <div
         dangerouslySetInnerHTML={{
-          __html: marked(testResult.replace(/(\r\n|\n|\r)/g, "<br />")),
+          __html: testResult,
         }}
       ></div>
     </div>
