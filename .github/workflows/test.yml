@@ -1,5 +1,5 @@
 # runs both client and server tests
-name: tests
+name: test
 
 on: [push]
 
