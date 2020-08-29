@@ -1,20 +1,19 @@
 import { List, ListItem } from "@material-ui/core";
 import React from "react";
-import examples from "../examples";
 import "./CommandTest.scss";
 
 function ExampleList(props: ExampleListProps) {
   const handleExampleClick = (index: number) => {
     if (props.onExampleSelect) {
       props.onExampleSelect(
-        examples[index].destUrl,
-        examples[index].outputTemplate,
-        examples[index].args
+        props.examples[index].destUrl,
+        props.examples[index].outputTemplate,
+        props.examples[index].args
       );
     }
   };
 
-  const listItems = examples.map((example, index) => (
+  const listItems = props.examples.map((example, index) => (
     <ListItem
       button
       key={example.title}

@@ -12,7 +12,15 @@ type CommandTestProps = {
   destUrl: string;
 };
 
+type Example = {
+  args: string;
+  destUrl: string;
+  outputTemplate: string;
+  title: string;
+};
+
 type ExampleListProps = {
+  examples: Example[];
   onExampleSelect?: (
     destUrl: string,
     outputTemplate: string,

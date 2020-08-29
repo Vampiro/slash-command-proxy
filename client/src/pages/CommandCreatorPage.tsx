@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import CommandCreator from "../components/CommandCreator";
 import CommandTest from "../components/CommandTest";
 import ExampleList from "../components/ExampleList";
+import examples from "../examples";
 import "./CommandCreatorPage.scss";
 
 function CommandCreatorPage() {
@@ -66,7 +67,10 @@ function CommandCreatorPage() {
         <Card>
           <CardHeader title="Example Commands" />
           <CardContent>
-            <ExampleList onExampleSelect={handleExampleSelect}></ExampleList>
+            <ExampleList
+              examples={examples}
+              onExampleSelect={handleExampleSelect}
+            ></ExampleList>
           </CardContent>
         </Card>
       </Grid>
