@@ -45,12 +45,12 @@ function CommandTest(props: CommandTestProps) {
     if (event.key === "Enter") {
       const element = event.target as HTMLInputElement;
       event.preventDefault();
-      await handleGoClick();
+      await executeTest();
       element.focus();
     }
   };
 
-  const handleGoClick = async () => {
+  const executeTest = async () => {
     setLoading(true);
     try {
       const response = await Axios.get(
@@ -93,7 +93,7 @@ function CommandTest(props: CommandTestProps) {
               color="primary"
               disabled={loading}
               onClick={() => {
-                handleGoClick();
+                executeTest();
               }}
               size="small"
             >
