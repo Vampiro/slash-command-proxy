@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 function CommandTest(props: CommandTestProps) {
   const classes = useStyles();
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   const [testResult, setTestResult] = useState<string>("");
 
   // whenever any props are changed, blank out test result
@@ -36,10 +36,12 @@ function CommandTest(props: CommandTestProps) {
     }
   };
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
+      const element = event.target as HTMLInputElement;
       event.preventDefault();
-      handleGoClick();
+      await handleGoClick();
+      element.focus();
     }
   };
 
@@ -53,6 +55,7 @@ function CommandTest(props: CommandTestProps) {
     } catch (error) {
       setTestResult(`An error occurred: ${error}`);
     }
+
     setLoading(false);
   };
 
