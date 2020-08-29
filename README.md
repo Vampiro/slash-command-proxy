@@ -1,4 +1,4 @@
-# Slash Command Proxy &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Vampiro/slash-command-proxy/blob/master/LICENSE) [![CI](https://github.com/Vampiro/slash-command-proxy/workflows/CI/badge.svg)](https://github.com/Vampiro/slash-command-proxy/actions?query=workflow%3ACI)
+# Slash Command Proxy<br/>[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Vampiro/slash-command-proxy/blob/master/LICENSE) [![CI](https://github.com/Vampiro/slash-command-proxy/workflows/CI/badge.svg)](https://github.com/Vampiro/slash-command-proxy/actions?query=workflow%3ACI)
 
 Proxies Slash Commands from [Slack](https://slack.com/) and [Mattermost](https://mattermost.com/) and formulates useful responses.
 

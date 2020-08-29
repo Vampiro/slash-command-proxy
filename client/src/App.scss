@@ -25,8 +25,11 @@ $nav-bar-height: 48px;
         margin-right: 10px;
       }
 
-      svg:hover {
-        color: paleturquoise;
+      // @media to prevent touch devices from showing hover color after press is finished
+      @media (hover: hover) {
+        svg:hover {
+          color: paleturquoise;
+        }
       }
     }
   }

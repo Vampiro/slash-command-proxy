@@ -39,7 +39,7 @@ The [Command Creator](https://slash-command-proxy.herokuapp.com/) helps you form
 
 ### Destination URL
 
-The **Destination URL** is where you want the request to actually go. In our dice rolling example, I actually want to hit an API that will give back a simulated dice roll. Using [DiceAPI](http://roll.diceapi.com/), you can request an 20-sided die roll by hitting this url: http://roll.diceapi.com/json/d20
+The **Destination URL** is where you want the request to actually go. In our dice rolling example, we actually want to hit an API that will give back a simulated dice roll. Using [DiceAPI](http://roll.diceapi.com/), you can request an 20-sided die roll by hitting this url: http://roll.diceapi.com/json/d20
 
 In the **Slash Command Proxy**, http://roll.diceapi.com/json/d20 would be your **Destination URL**. The DiceAPI responds back with JSON in this form:
 
@@ -159,4 +159,4 @@ Here is a list of variables available for you to take advantage of:
 
 ### Examples
 
-Several example commands that you can create are included. A few examples take advantage of Markdown, which Mattermost uses. Slack has a [custom style of formatting](https://slack.com/help/articles/202288908-Format-your-messages), so you'll have to take that into account when creating your **Output Template**. Also, newlines are somewhat tricky to deal with so you might have to tweak things a bit to look good in your specific chat client (might look a touch different than the output of the Command Tester I provide).
+Several example commands that you can create are included. A few examples take advantage of Markdown, which Mattermost uses. Slack has a [custom style of formatting](https://slack.com/help/articles/202288908-Format-your-messages), so you'll have to take that into account when creating your **Output Template**. Also, newlines are somewhat tricky to deal with so you might have to tweak things a bit to look good in your specific chat client (might look a touch different than the output of the Command Tester).

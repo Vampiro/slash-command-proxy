@@ -18,7 +18,7 @@ export default [
     destUrl:
       'https://www.dnd5eapi.co/api/spells/${args.join("-").toLowerCase()}',
     outputTemplate:
-      '### ${res.name}\n*Level ${res.level} ${res.school.name}*\n\n**Casting Time:** ${res["casting_time"]}\n\n**Range:** ${res.range}\n\n**Components**: ${res.components.length === 0 ? "*None*" : res.components.join(", ")}\n\n**Duration:** ${res.duration}\n\n**Classes:** ${res.classes ? res.classes.map((c) => c.name).join(", ") : ""}\n\n**Description:** ${res.desc ? res.desc.map((desc) => desc).join("\\n") : ""}\n\n${res["higher_level"] ? res["higher_level"].map((hl) => `**At Higher Levels:** ${hl}\\n`).join(""): ""}',
+      '### ${res.name}\n*Level ${res.level} ${res.school.name}*\n\n**Casting Time:** ${res["casting_time"]}\n\n**Range:** ${res.range}\n\n**Components**: ${res.components.length === 0 ? "*None*" : res.components.join(", ")}\n\n**Duration:** ${res.duration}\n\n**Classes:** ${res.classes ? res.classes.map((c) => c.name).join(", ") : ""}\n\n**Description:** ${res.desc ? res.desc.map((desc) => desc).join("\\n") : ""}\n\n${res["higher_level"] ? `**At Higher Levels:** ${res["higher_level"].join("\\n")}` : ""}',
     args: "Magic Missile",
   },
   {
@@ -31,7 +31,8 @@ export default [
   {
     title: "Error Code Cats",
     destUrl: "https://http.cat/${args[0]}",
-    outputTemplate: "![Hello World](https://http.cat/${args[0]})",
+    outputTemplate:
+      '<img style="max-height: 70vh; max-width:100%;" src="https://http.cat/${args[0]}" />',
     args: "404",
   },
   {
@@ -45,7 +46,7 @@ export default [
     destUrl:
       'https://api.magicthegathering.io/v1/cards?name=${encodeURIComponent(args.join(" "))}&pageSize=1',
     outputTemplate:
-      '${res.cards.map((card) =>\n\n`![Card Image](${card.imageUrl})`)\n\n.join("")}',
+      '${res.cards.length > 0 ? `![Card Image](${res.cards[0].imageUrl})` : "Card not found."}',
     args: "Sengir Vampire",
   },
   {
@@ -60,27 +61,28 @@ export default [
     title: "Random Cat",
     destUrl: "https://aws.random.cat/meow",
     outputTemplate:
-      '<img style="max-height: 700px; max-width:700px;" src="${res.file}" />',
+      '<img style="max-height: 70vh; max-width:100%;" src="${res.file}" />',
     args: "",
   },
   {
     title: "Random Dog",
     destUrl: "https://random.dog/woof.json",
     outputTemplate:
-      '<img style="max-height: 700px; max-width:700px;" src="${res.url}" />',
+      '<img style="max-height: 70vh; max-width:100%;" src="${res.url}" />',
     args: "",
   },
   {
     title: "Random Fox",
     destUrl: "https://randomfox.ca/floof/",
     outputTemplate:
-      '<img style="max-height: 700px; max-width:700px;" src="${res.image}" />',
+      '<img style="max-height: 70vh; max-width:100%;" src="${res.image}" />',
     args: "",
   },
   {
     title: "Roll a die",
     destUrl: "http://roll.diceapi.com/json/d${args[0]}",
-    outputTemplate: "With a d${args[0]}, you roll a ${res.dice[0].value}!",
+    outputTemplate:
+      "@${client.user_name} rolled a **${res.dice[0].value}** *(with a d${args[0]})*",
     args: "20",
   },
 ];

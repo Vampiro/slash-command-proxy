@@ -1,6 +1,10 @@
 .CommandCreatorPage {
   padding-bottom: 16px;
-  padding-top: 16px;
+  padding-top: 8px;
+
+  .MuiCardHeader-root {
+    padding-top: 10px;
+  }
 
   .command-test-wrapper {
     margin-top: 16px;
