@@ -61,6 +61,7 @@ function CommandTest(props: CommandTestProps) {
       <Grid alignItems="center" container>
         <Grid item className="args-wrapper">
           <TextField
+            disabled={loading}
             fullWidth
             label="Command Args"
             onChange={handleArgsChange}
@@ -75,6 +76,7 @@ function CommandTest(props: CommandTestProps) {
             <Fab
               aria-label="go"
               color="primary"
+              disabled={loading}
               onClick={() => {
                 handleGoClick();
               }}
