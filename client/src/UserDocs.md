@@ -159,4 +159,4 @@ Here is a list of variables available for you to take advantage of:
 
 ### Examples
 
-Several example commands that you can create are included. A few examples take advantage of Markdown, which Mattermost uses. Slack has a [custom style of formatting](https://slack.com/help/articles/202288908-Format-your-messages), so you'll have to take that into account when creating your **Output Template**.
+Several example commands that you can create are included. A few examples take advantage of Markdown, which Mattermost uses. Slack has a [custom style of formatting](https://slack.com/help/articles/202288908-Format-your-messages), so you'll have to take that into account when creating your **Output Template**. Also, newlines are somewhat tricky to deal with so you might have to tweak things a bit to look good in your specific chat client (might look a touch different than the output of the Command Tester I provide).
