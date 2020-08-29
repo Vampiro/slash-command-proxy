@@ -39,7 +39,7 @@ export default [
     destUrl:
       'https://api.magicthegathering.io/v1/cards?name=${encodeURIComponent(args.join(" "))}&pageSize=1',
     outputTemplate:
-      '${res.cards.map((card) =>\n\n`${card.name} - ${card.manaCost}\n\n${card.type}\n\n${card.text}`)\n\n.join("")}',
+      '${res.cards.map((card) =>\n\n`![GitHub Logo](${card.imageUrl})`)\n\n.join("")}',
     args: "Sengir Vampire",
   },
   {
