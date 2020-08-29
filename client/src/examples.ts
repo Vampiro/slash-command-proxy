@@ -19,7 +19,7 @@ export default [
       'https://www.dnd5eapi.co/api/spells/${args.join("-").toLowerCase()}',
     outputTemplate:
       '### ${res.name}\n*Level ${res.level} ${res.school.name}*\n\n**Casting Time:** ${res["casting_time"]}\n\n**Range:** ${res.range}\n\n**Components**: ${res.components.length === 0 ? "*None*" : res.components.join(", ")}\n\n**Duration:** ${res.duration}\n\n**Classes:** ${res.classes ? res.classes.map((c) => c.name).join(", ") : ""}\n\n**Description:** ${res.desc ? res.desc.map((desc) => desc).join("\\n") : ""}\n\n${res["higher_level"] ? res["higher_level"].map((hl) => `**At Higher Levels:** ${hl}\\n`).join(""): ""}',
-    args: "entangle",
+    args: "Magic Missile",
   },
   {
     title: "Dictionary",
@@ -33,6 +33,14 @@ export default [
     destUrl: "https://8ball.delegator.com/magic/JSON/Question",
     outputTemplate: "${res.magic.answer}",
     args: "",
+  },
+  {
+    title: "MTG",
+    destUrl:
+      'https://api.magicthegathering.io/v1/cards?name=${encodeURIComponent(args.join(" "))}&pageSize=1',
+    outputTemplate:
+      '${res.cards.map((card) =>\n\n`${card.name} - ${card.manaCost}\n\n${card.type}\n\n${card.text}`)\n\n.join("")}',
+    args: "Sengir Vampire",
   },
   {
     title: "Programming Jokes",
