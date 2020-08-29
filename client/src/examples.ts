@@ -35,6 +35,14 @@ export default [
     args: "",
   },
   {
+    title: "Programming Jokes",
+    destUrl:
+      "https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist",
+    outputTemplate:
+      '${res.type === "single" ? `${res.joke}` : `${res.setup}\n\n*${res.delivery}*`}',
+    args: "",
+  },
+  {
     title: "Roll a die",
     destUrl: "http://roll.diceapi.com/json/d${args[0]}",
     outputTemplate: "With a d${args[0]}, you roll a ${res.dice[0].value}!",
