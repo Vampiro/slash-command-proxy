@@ -29,6 +29,12 @@ export default [
     args: "great",
   },
   {
+    title: "Error Code Cats",
+    destUrl: "https://http.cat/${args[0]}",
+    outputTemplate: "![Hello World](https://http.cat/${args[0]})",
+    args: "404",
+  },
+  {
     title: "Magic 8-ball",
     destUrl: "https://8ball.delegator.com/magic/JSON/Question",
     outputTemplate: "${res.magic.answer}",
@@ -51,9 +57,24 @@ export default [
     args: "",
   },
   {
+    title: "Random Cat",
+    destUrl: "https://aws.random.cat/meow",
+    outputTemplate:
+      '<img style="max-height: 700px; max-width:700px;" src="${res.file}" />',
+    args: "",
+  },
+  {
     title: "Random Dog",
-    destUrl: "https://dog.ceo/api/breeds/image/random",
-    outputTemplate: "![Dog Image](${res.message})",
+    destUrl: "https://random.dog/woof.json",
+    outputTemplate:
+      '<img style="max-height: 700px; max-width:700px;" src="${res.url}" />',
+    args: "",
+  },
+  {
+    title: "Random Fox",
+    destUrl: "https://randomfox.ca/floof/",
+    outputTemplate:
+      '<img style="max-height: 700px; max-width:700px;" src="${res.image}" />',
     args: "",
   },
   {
