@@ -147,8 +147,6 @@ _(adverb)_
   <li>Excellently; very well.</li>
 </ol>
 
-_Note: Messages in Mattermost can be formatted using Markdown, so the above works. Slack uses a different way of formatting, so you'll have to take that into account when creating your **Output Template**._
-
 Here is a list of variables available for you to take advantage of:
 
 | Variable   | Values                                                                                                           |
@@ -158,3 +156,7 @@ Here is a list of variables available for you to take advantage of:
 |            | `channel_id`, `channel_name`, `command`, `response_url`, `team_domain`, `team_id`,                               |
 |            | `text`, `token`, `trigger_id`, `user_id`, `user_name`                                                            |
 | `res.*`    | `*` is any attribute in the response from the **Destination Server**. Available in the **Output Template** only. |
+
+### Examples
+
+Several examples of commands that you can create are included. The output of several of these are in Markdown which Mattermost uses. Slack uses a slightly different style of formatting so you'll have to take that into account when creating your **Output Template**.
