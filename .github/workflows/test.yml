@@ -12,8 +12,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - name: Install Dependencies
+      - name: Install Client Dependencies
+        working-directory: ./client
+        run: npm install
+      - name: Run Client Tests
+        working-directory: ./client
+        run: npm test
+      - name: Install Server Dependencies
         working-directory: ./server
         run: npm install
-      - name: Run Tests
+      - name: Run Server Tests
+        working-directory: ./server
         run: npm test
