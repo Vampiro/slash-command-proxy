@@ -1,7 +1,6 @@
 import { Grid } from "@material-ui/core";
-import Axios from "axios";
-import React, { useEffect, useState } from "react";
-import UserDocsMd from "../UserDocs.md";
+import React from "react";
+import raw from "raw.macro";
 import marked from "marked";
 import hljs from "highlight.js/lib/core";
 import javascript from "highlight.js/lib/languages/javascript";
@@ -26,26 +25,10 @@ marked.setOptions({
   },
 });
 
+// get the raw text of UserDocs.md, convert it to html with marked
+const docHtml = marked(raw("../UserDocs.md"));
+
 function UserDocsPage() {
-  const [docHtml, setDocHtml] = useState("");
-
-  useEffect(() => {
-    document.title = "Documentation";
-
-    // fetch UserDocs.md once when this component first loads
-    const fetchMarkdown = async () => {
-      try {
-        const response = await Axios.get(UserDocsMd);
-        // convert markdown to html with marked.js
-        const html = marked(response.data);
-        setDocHtml(html);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchMarkdown();
-  }, []);
-
   return (
     <Grid className="UserDocsPage" container justify="center">
       <Grid item xs={12} md={11} lg={7}>
