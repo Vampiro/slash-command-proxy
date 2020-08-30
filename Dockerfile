@@ -13,12 +13,13 @@ WORKDIR /app/client
 RUN npm ci --production --silent
 RUN npm run build
 
-# production container
+# copy files into server image
 FROM node:12
 COPY --from=build /app/server/build /app/server/build
 COPY --from=build /app/server/node_modules /app/server/node_modules
 COPY --from=build /app/server/package*.json /app/server/
 COPY --from=build /app/client/build /app/client/build
-EXPOSE 80
+
+# run server
 WORKDIR /app/server
 CMD ["npm", "start"]
