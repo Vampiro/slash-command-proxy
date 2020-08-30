@@ -10,7 +10,9 @@ import {
   CircularProgress,
   Fab,
   Grid,
+  SvgIcon,
   TextField,
+  Tooltip,
   Typography,
 } from "@material-ui/core";
 import { createCommandUrlForTest } from "../Utils";
@@ -19,6 +21,9 @@ import CancelIcon from "@material-ui/icons/Clear";
 import marked from "marked";
 import hljs from "highlight.js/lib/core";
 import json from "highlight.js/lib/languages/json";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import { mdiCodeTags, mdiFormatPilcrow } from "@mdi/js";
 import { makeStyles } from "@material-ui/core/styles";
 import "./CommandTest.scss";
 import "highlight.js/styles/github.css";
@@ -38,9 +43,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+enum FormatType {
+  Markdown = "MARKDOWN",
+  Raw = "RAW",
+}
+
 function CommandTest(props: CommandTestProps) {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
+  const [formatType, setFormatType] = useState(FormatType.Markdown);
   const [testResult, _setTestResult] = useState({ result: "", timestamp: 0 });
 
   // sets the rest result after looking to see if its timestamp is later than the
@@ -93,27 +104,63 @@ function CommandTest(props: CommandTestProps) {
       const response = await Axios.get(
         createCommandUrlForTest(props.destUrl, props.outputTemplate, props.args)
       );
-      const { text } = response.data;
-      try {
-        const textObj = JSON.parse(text);
-        const objStr = JSON.stringify(textObj, null, 2);
-        setTestResult(
-          `<pre>${hljs.highlight("json", objStr).value}</pre>`,
-          timestamp
-        );
-      } catch (e) {
-        setTestResult(marked(text), timestamp);
-      }
+      setTestResult(response.data.text);
     } catch (error) {
       setTestResult(`An error occurred: ${error}`, timestamp);
     }
   };
 
+  // style the test result based on user's choice
+  const formatOutput = (testResult: string) => {
+    if (formatType === FormatType.Markdown) {
+      try {
+        const textObj = JSON.parse(testResult);
+        const objStr = JSON.stringify(textObj, null, 2);
+        return `<pre>${hljs.highlight("json", objStr).value}</pre>`;
+      } catch (e) {
+        return marked(testResult);
+      }
+    }
+
+    return `<pre>${testResult}</pre>`;
+  };
+
   return (
     <div className="CommandTest">
-      <Typography className="title" variant="h6">
-        Test Command
-      </Typography>
+      <div className="header">
+        <Typography className="title" variant="h6">
+          Test Command
+        </Typography>
+        <ToggleButtonGroup
+          size="small"
+          value={formatType}
+          exclusive
+          onChange={(event, value) => {
+            if (value !== null) {
+              setFormatType(value);
+            }
+          }}
+          aria-label="text alignment"
+        >
+          <ToggleButton
+            aria-label="Markdown Format"
+            value={FormatType.Markdown}
+          >
+            <Tooltip arrow placement="top" title="Markdown Formatting">
+              <SvgIcon fontSize="small">
+                <path d={mdiFormatPilcrow}></path>
+              </SvgIcon>
+            </Tooltip>
+          </ToggleButton>
+          <ToggleButton aria-label="Raw Format" value={FormatType.Raw}>
+            <Tooltip arrow placement="top" title="Raw Formatting">
+              <SvgIcon fontSize="small">
+                <path d={mdiCodeTags}></path>
+              </SvgIcon>
+            </Tooltip>
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </div>
       <Grid alignItems="center" container>
         <Grid item className="args-wrapper">
           <TextField
@@ -161,12 +208,14 @@ function CommandTest(props: CommandTestProps) {
           </div>
         </Grid>
       </Grid>
-      <div
-        className="test-result"
-        dangerouslySetInnerHTML={{
-          __html: testResult.result,
-        }}
-      ></div>
+      {testResult.result && (
+        <div
+          className="test-result"
+          dangerouslySetInnerHTML={{
+            __html: formatOutput(testResult.result),
+          }}
+        ></div>
+      )}
     </div>
   );
 }

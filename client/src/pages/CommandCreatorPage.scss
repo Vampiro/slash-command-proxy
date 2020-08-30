@@ -13,6 +13,7 @@
   .MuiCardContent-root {
     padding: 8px 16px;
 
+    // override for MUI
     &:last-child {
       padding-bottom: 10px;
     }

@@ -6,12 +6,10 @@
     margin-right: 10px;
   }
 
-  :first-child {
-    margin-top: 0px;
-  }
-
-  :last-child {
-    margin-bottom: 0px;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
   }
 
   .MuiTextField-root {
@@ -19,18 +17,31 @@
     margin-bottom: 8px;
   }
 
-  p {
-    margin-bottom: 0px;
-    margin-top: 0px;
-  }
-
   .test-result {
     max-height: calc(100vh - #{$nav-bar-height} - 140px);
     overflow: auto;
 
+    > :first-child {
+      margin-top: 0px;
+    }
+
     img {
       max-height: 70vh;
       max-width: 100%;
+    }
+
+    > :last-child {
+      margin-bottom: 0px;
+    }
+
+    p {
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+
+    > :first-child:last-child {
+      padding-bottom: 4px;
+      padding-top: 4px;
     }
   }
 
@@ -38,5 +49,6 @@
     font-size: 1.2rem;
     font-weight: 400;
     margin-bottom: 2px;
+    margin-top: 2px; // account for shift down due to output type icons
   }
 }
