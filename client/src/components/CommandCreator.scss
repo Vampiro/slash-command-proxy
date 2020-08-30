@@ -10,4 +10,15 @@
       position: relative;
     }
   }
+
+  .MuiTextField-root {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 2px;
+  }
 }

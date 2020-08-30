@@ -37,24 +37,4 @@ $nav-bar-height: 48px;
   .main-content {
     margin-top: $nav-bar-height;
   }
-
-  .MuiCardHeader-root {
-    padding-bottom: 0px;
-
-    .MuiCardHeader-title {
-      font-size: 1.2rem;
-    }
-  }
-  .MuiCardContent-root {
-    padding-top: 4px;
-
-    &:last-child {
-      padding-bottom: 8px;
-    }
-  }
-
-  .MuiTextField-root {
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
 }

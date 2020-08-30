@@ -1,4 +1,10 @@
-import { Fab, SvgIcon, TextField, Tooltip } from "@material-ui/core";
+import {
+  Fab,
+  SvgIcon,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@material-ui/core";
 import React, { ChangeEvent, useState } from "react";
 import { createCommandUrl } from "../Utils";
 import { mdiContentCopy } from "@mdi/js";
@@ -37,6 +43,9 @@ function CommandCreator(props: CommandCreatorProps) {
 
   return (
     <div className="CommandCreator">
+      <Typography className="title" variant="h6">
+        Command Creator
+      </Typography>
       <TextField
         fullWidth
         label="Destination URL"

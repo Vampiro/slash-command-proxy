@@ -6,9 +6,22 @@
     margin-right: 10px;
   }
 
+  :first-child {
+    margin-top: 0px;
+  }
+
+  :last-child {
+    margin-bottom: 0px;
+  }
+
+  .MuiTextField-root {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
   p {
-    margin-bottom: 4px;
-    margin-top: 4px;
+    margin-bottom: 0px;
+    margin-top: 0px;
   }
 
   .test-result {
@@ -19,5 +32,11 @@
       max-height: 70vh;
       max-width: 100%;
     }
+  }
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 2px;
   }
 }

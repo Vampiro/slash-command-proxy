@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, Grid } from "@material-ui/core";
+import { Card, CardContent, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import CommandCreator from "../components/CommandCreator";
 import CommandTest from "../components/CommandTest";
@@ -41,7 +41,6 @@ function CommandCreatorPage() {
     <Grid className="CommandCreatorPage" container justify="center">
       <Grid className="col" item xs={12} sm={8} md={7} lg={6}>
         <Card>
-          <CardHeader title="Command Creator" />
           <CardContent>
             <CommandCreator
               destUrl={destUrl}
@@ -52,7 +51,6 @@ function CommandCreatorPage() {
           </CardContent>
         </Card>
         <Card className="command-test-wrapper">
-          <CardHeader title="Test Command" />
           <CardContent>
             <CommandTest
               args={args}
@@ -65,7 +63,6 @@ function CommandCreatorPage() {
       </Grid>
       <Grid className="col" item xs={12} sm={4} md={4} lg={3}>
         <Card>
-          <CardHeader title="Example Commands" />
           <CardContent>
             <ExampleList
               examples={examples}

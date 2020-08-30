@@ -1,6 +1,6 @@
-import { List, ListItem } from "@material-ui/core";
+import { List, ListItem, Typography } from "@material-ui/core";
 import React from "react";
-import "./CommandTest.scss";
+import "./ExampleList.scss";
 
 function ExampleList(props: ExampleListProps) {
   const handleExampleClick = (index: number) => {
@@ -25,7 +25,14 @@ function ExampleList(props: ExampleListProps) {
     </ListItem>
   ));
 
-  return <List>{listItems}</List>;
+  return (
+    <div className="ExampleList">
+      <Typography className="title" variant="h6">
+        Example Commands
+      </Typography>
+      <List>{listItems}</List>
+    </div>
+  );
 }
 
 export default ExampleList;

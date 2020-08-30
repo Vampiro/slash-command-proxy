@@ -6,7 +6,13 @@ import React, {
   useCallback,
 } from "react";
 import Axios from "axios";
-import { CircularProgress, Fab, Grid, TextField } from "@material-ui/core";
+import {
+  CircularProgress,
+  Fab,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { createCommandUrlForTest } from "../Utils";
 import CallMadeIcon from "@material-ui/icons/CallMade";
 import CancelIcon from "@material-ui/icons/Clear";
@@ -105,6 +111,9 @@ function CommandTest(props: CommandTestProps) {
 
   return (
     <div className="CommandTest">
+      <Typography className="title" variant="h6">
+        Test Command
+      </Typography>
       <Grid alignItems="center" container>
         <Grid item className="args-wrapper">
           <TextField

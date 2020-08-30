@@ -2,15 +2,19 @@
   padding-bottom: 16px;
   padding-top: 8px;
 
-  .MuiCardHeader-root {
-    padding-top: 10px;
+  .col {
+    padding: 8px;
   }
 
   .command-test-wrapper {
     margin-top: 16px;
   }
 
-  .col {
-    padding: 8px;
+  .MuiCardContent-root {
+    padding: 8px 16px;
+
+    &:last-child {
+      padding-bottom: 10px;
+    }
   }
 }
