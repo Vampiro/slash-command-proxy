@@ -117,7 +117,7 @@ function CommandTest(props: CommandTestProps) {
         const textObj = JSON.parse(testResult);
         const objStr = JSON.stringify(textObj, null, 2);
         const formattingNote = marked(
-          "*Note: JSON received is automatically stringified and made to look nice while in Markdown Formatting mode.*"
+          "*Note: JSON received is automatically formatted to look nice while in Markdown Formatting mode.*"
         );
         return `${formattingNote}<pre>${
           hljs.highlight("json", objStr).value
