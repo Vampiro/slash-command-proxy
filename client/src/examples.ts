@@ -31,8 +31,7 @@ export default [
   {
     title: "Error Code Cats",
     destUrl: "https://http.cat/${args[0]}",
-    outputTemplate:
-      '<img style="max-height: 70vh; max-width:100%;" src="https://http.cat/${args[0]}" />',
+    outputTemplate: "![Error Code Cat Pic](https://http.cat/${args[0]})",
     args: "404",
   },
   {
@@ -60,22 +59,19 @@ export default [
   {
     title: "Random Cat",
     destUrl: "https://aws.random.cat/meow",
-    outputTemplate:
-      '<img style="max-height: 70vh; max-width:100%;" src="${res.file}" />',
+    outputTemplate: "![Cat Pic](${res.file})",
     args: "",
   },
   {
     title: "Random Dog",
     destUrl: "https://random.dog/woof.json",
-    outputTemplate:
-      '<img style="max-height: 70vh; max-width:100%;" src="${res.url}" />',
+    outputTemplate: "![Dog Pic](${res.url})",
     args: "",
   },
   {
     title: "Random Fox",
     destUrl: "https://randomfox.ca/floof/",
-    outputTemplate:
-      '<img style="max-height: 70vh; max-width:100%;" src="${res.image}" />',
+    outputTemplate: "![Fox Pic](${res.image})",
     args: "",
   },
   {

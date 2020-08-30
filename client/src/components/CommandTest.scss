@@ -14,5 +14,10 @@
   .test-result {
     max-height: calc(100vh - #{$nav-bar-height} - 140px);
     overflow: auto;
+
+    img {
+      max-height: 70vh;
+      max-width: 100%;
+    }
   }
 }
