@@ -14,13 +14,13 @@ jobs:
           node-version: "12.x"
       - name: Install Client Dependencies
         working-directory: ./client
-        run: npm install
+        run: npm ci
       - name: Run Client Tests
         working-directory: ./client
         run: npm test
       - name: Install Server Dependencies
         working-directory: ./server
-        run: npm install
+        run: npm ci
       - name: Run Server Tests
         working-directory: ./server
         run: npm test
