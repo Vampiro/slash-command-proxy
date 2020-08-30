@@ -5,12 +5,12 @@ COPY . .
 
 # install server deps and build
 WORKDIR /app/server
-RUN npm ci --production
+RUN npm ci --production --silent
 RUN npm run build
 
 # install client deps and build
 WORKDIR /app/client
-RUN npm ci --production
+RUN npm ci --production --silent
 RUN npm run build
 
 # production container
