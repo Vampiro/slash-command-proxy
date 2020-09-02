@@ -10,8 +10,9 @@ Usage documentation is hosted in the [app](https://slash-command-proxy.herokuapp
 
 ### Environment variables
 
-`PORT` (optional) is the port the server will run on. Defaults to 80.
-`REACT_APP_PROXY_DEV_DOMAIN` (development) When building the client, this variable will be used to make proxy requests/ build the Command URL when running with `npm start`.
+`PORT` (optional, runtime) is the port the server will run on. Defaults to 80.
+
+`REACT_APP_PROXY_DEV_DOMAIN` (development, build-time) When building the client, this variable will be used to make proxy requests/ build the Command URL when running with `npm start`.
 
 ### Building & running the docker container
 
