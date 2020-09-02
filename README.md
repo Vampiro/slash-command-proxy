@@ -52,7 +52,7 @@ By default, when you run with `npm start`, your proxy requests will be made agai
 
 ```bash
 # client/.env
-REACT_APP_PROXY_DEV_DOMAIN=localhost
+REACT_APP_PROXY_DEV_DOMAIN=http://localhost
 ```
 
 _Note: you must run `npm start` again after you change an environment variable._
