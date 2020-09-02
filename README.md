@@ -31,7 +31,7 @@ npm install
 npm run build
 ```
 
-#### Build the server code
+#### Build & run the server code
 
 ```javascript
 cd server
@@ -48,7 +48,7 @@ The app should be running on localhost port 80 unless you specified another port
 
 This was made with create-react-app and uses its basic scripts. `npm start` is sufficient to run the client on its own in a development mode.
 
-By default, when you run with `npm start`, your proxy requests will be made against http://slash-command-proxy.herokuapp.com. You can change this behavior (like if you want to run against changes you've made in your server) by setting the environment variable `REACT_APP_PROXY_DEV_DOMAIN` to wherever you want (like localhost). This project uses `dotenv` so you can create a .env file for this:
+By default, when you run with `npm start`, your proxy requests will be made against http://slash-command-proxy.herokuapp.com. You can change this behavior (like if you want to test changes you've made to the server code) by setting the environment variable `REACT_APP_PROXY_DEV_DOMAIN` to wherever you want (like localhost). This project uses `dotenv`, so you can create a .env file for this:
 
 ```bash
 # client/.env
