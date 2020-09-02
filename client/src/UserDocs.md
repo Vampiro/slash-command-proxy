@@ -35,7 +35,7 @@ The **Slash Command Proxy** accepts an HTTP `GET` request on the `/proxy` endpoi
 
 Because both of these are sent as parameters to the **Slash Command Proxy**, all of the text within will have to be encoded URI components. This would be not-so-great for a human to have to type themselves.
 
-The [Command Creator](https://slash-command-proxy.herokuapp.com/) helps you formulate the **Command URL** that you will specify in your chat client when you set up the Slash Command. The **Command URL** contains both the **Destination URL** as well as the optional **Output Template**.
+The [Command Creator](/) helps you formulate the **Command URL** that you will specify in your chat client when you set up the Slash Command. The **Command URL** contains both the **Destination URL** as well as the optional **Output Template**.
 
 ### Destination URL
 
@@ -72,7 +72,7 @@ Using **Args**, we can send along user input with the request: _http\://roll.dic
 
 ### Command Creator
 
-So to put it all together, we would go to the [Slash Command Creator](https://slash-command-proxy.herokuapp.com/) tool and enter:
+So to put it all together, we would go to the [Slash Command Creator](/) tool and enter:
 
 1. **Destination URL**: http\://roll.diceapi.com/json/d\${args[0]}
 2. **Output Template**: You rolled a \${res.dice[0].value}!
