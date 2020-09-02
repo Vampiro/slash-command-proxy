@@ -1,16 +1,12 @@
 {
   "name": "slash-command-proxy-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "tsc",
     "dev": "nodemon",
     "start": "node build/server.js",
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
