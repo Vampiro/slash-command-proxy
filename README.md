@@ -62,6 +62,8 @@ _Note: you must run `npm start` again after you change an environment variable._
 
 The server side depends on the client side already having been built with its artifacts in the `client/build` directory. To develop server code, you can run `npm run dev` which will run the server in a development mode.
 
+Documentation (TypeDoc) can be generated with `npm run docs`. Point your browser to `server/docs/index.html`.
+
 ### Automatic deployment
 
 A [GitHub Action](.github/workflows/ci.yml) has been set up to deploy to Heroku with each change to the `master` branch.

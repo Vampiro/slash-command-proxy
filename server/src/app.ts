@@ -34,6 +34,7 @@ router.get("/proxy", async (ctx, next) => {
   let response: ProxyResponse = { text: "" };
   const outputTemplate = ctx.query["prx.output"];
 
+  // helper function to create the response.
   const setResponse = (text: string, isError = false) => {
     response.text = text;
 
@@ -45,13 +46,16 @@ router.get("/proxy", async (ctx, next) => {
   };
 
   if (ctx.query["prx.url"]) {
+    // start out by replacing any variables within destination url (args)
     const destUrl = replaceVariables(ctx.query["prx.url"], vc);
 
     try {
+      // send off request to destination server
       const extResponse = await axios.get(destUrl);
       vc.res = extResponse.data;
 
       if (outputTemplate) {
+        // try to replace any variables within output template (args, client, response)
         try {
           setResponse(replaceVariables(outputTemplate, vc));
         } catch (error) {
@@ -61,6 +65,7 @@ router.get("/proxy", async (ctx, next) => {
           );
         }
       } else {
+        // no output template. check if string or object and set response appropriately
         if (typeof vc.res === "string") {
           setResponse(vc.res);
         } else {
@@ -81,7 +86,7 @@ app.use(KoaCors());
 app.use(router.middleware());
 app.use(KoaStatic(reactBuildDir));
 
-// router everything left to index.html where react router will pick it up
+// route everything left to index.html where react router will pick it up
 app.use((ctx, next) => {
   ctx.type = "html";
   ctx.body = fs.readFileSync(`${reactBuildDir}/index.html`);
