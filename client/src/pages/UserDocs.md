@@ -124,6 +124,7 @@ and turn it into something useful to see in chat:
 
 **great**<br/>
 _/ɡreɪt/_
+
 _(adjective)_
 
 <ol style="margin-top: -10px;">

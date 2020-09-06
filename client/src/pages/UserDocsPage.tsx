@@ -26,7 +26,7 @@ marked.setOptions({
 });
 
 // get the raw text of UserDocs.md, convert it to html with marked
-const docHtml = marked(raw("../UserDocs.md"));
+const docHtml = marked(raw("./UserDocs.md"));
 
 function UserDocsPage() {
   return (
