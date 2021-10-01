@@ -31,7 +31,7 @@ In either client, you'll be presented with a form that contains a couple of key 
 The **Slash Command Proxy** accepts an HTTP `GET` request on the `/proxy` endpoint containing parameters for:
 
 1. The **Destination URL** of the REST API that you want to hit.
-2. An optional **Output Template** for what to show in your chat client as a response.
+2. An optional **Output Template** to format the response in your chat client.
 
 Because both of these are sent as parameters to the **Slash Command Proxy**, all of the text within will have to be encoded URI components. This would be not-so-great for a human to have to type themselves.
 
@@ -39,9 +39,9 @@ The [Command Creator](/) helps you formulate the **Command URL** that you will s
 
 ### Destination URL
 
-The **Destination URL** is where you want the request to actually go. In our dice rolling example, we actually want to hit an API that will give back a simulated dice roll. Using [DiceAPI](http://roll.diceapi.com/), you can request an 20-sided die roll by hitting this url: http://roll.diceapi.com/json/d20
+The **Destination URL** is where you want the request to actually go. In our dice rolling example, we want to hit an API that returns a simulated dice roll. Using [DiceAPI](http://roll.diceapi.com/), you can request an 20-sided die roll by hitting this url: http://roll.diceapi.com/json/d20
 
-In the **Slash Command Proxy**, http://roll.diceapi.com/json/d20 would be your **Destination URL**. The DiceAPI responds back with JSON in this form:
+In the **Slash Command Proxy**, http://roll.diceapi.com/json/d20 would be your **Destination URL**. DiceAPI responds back with JSON in this form:
 
 ```JSON
 {
@@ -58,7 +58,7 @@ Your chat client expects a response where any text you want to show up in chat s
 
 The **Output Template** needs to be able to retrieve information from within the response. In our dice rolling example, we want to get at the `value` attribute that is nested within the `JSON` response from DiceAPI. In the **Slash Command Proxy**, we have access to certain variables by wrapping the variable in `${}`, e.g. `${variable}`. Anything within the `JSON` response from our **Destination Server** is available in an object called `res`.
 
-So with the `JSON` we received from the DiceAPI, our variable would need to be `${res.dice[0].value}`. So the **Output Template** for our dice roll would be "You rolled a \${res.dice[0].value}!"
+With the `JSON` we received from the DiceAPI, our variable would need to be `${res.dice[0].value}`. The **Output Template** for our dice roll would be "You rolled a \${res.dice[0].value}!"
 
 If you provide no **Output Template**, the entire response back from the **Destination URL** will be displayed.
 
@@ -72,16 +72,16 @@ Using **Args**, we can send along user input with the request: _http\://roll.dic
 
 ### Command Creator
 
-So to put it all together, we would go to the [Slash Command Creator](/) tool and enter:
+To put it all together, we would go to the [Slash Command Creator](/) tool and enter:
 
 1. **Destination URL**: http\://roll.diceapi.com/json/d\${args[0]}
 2. **Output Template**: You rolled a \${res.dice[0].value}!
 
-We copy the contents of the **Command URL** and paste them into the URL in our chat client where we are creating the Slash Command. Then in our chat, we can type `/roll 20` and get back the results of a 20-sided die roll. `/roll 6` would give us results for a 6-sided die roll.
+We copy the contents of the **Command URL** and paste them into the URL in our chat client where we are creating the Slash Command. Then in our chat, we can type `/roll 20` and get back the result of a 20-sided die roll. `/roll 6` would give us the result of a 6-sided die roll.
 
 ### Variables
 
-Variables are available for formulating the **Destination URL** and/or the **Output Template**. You wrap variables in `${}` e.g. `${res.answer}`. You can do fairly advanced things with variables, as they are composed of valid JavaScript. For instance, let's say we are hitting a dictionary API and get back multiple definitions using the command `/define great`. You could have something crazy in your **Output Template** with JavaScript and Markdown:
+Variables are available for formulating the **Destination URL** and/or the **Output Template**. You wrap variables in `${}` e.g. `${res.answer}`. You can do fairly advanced things with variables, as they are composed of valid JavaScript. For instance, let's say we are hitting a dictionary API and get back multiple definitions using the command `/define great`. You could have something like this in your **Output Template** with JavaScript and Markdown:
 
 ```javascript
 **${args[0]}**
