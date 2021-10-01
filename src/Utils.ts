@@ -1,10 +1,4 @@
-let domain = window.location.origin;
-if (process.env.NODE_ENV === "development") {
-  domain =
-    process.env.REACT_APP_PROXY_DEV_DOMAIN ||
-    "http://slash-command-proxy.herokuapp.com";
-}
-
+const domain = "http://slash-command-proxy.herokuapp.com";
 const proxyUrl = `${domain}/proxy`;
 
 export function createCommandUrl(destUrl: string, outputTemplate?: string) {
