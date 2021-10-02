@@ -25,7 +25,7 @@ The app should now be running at the location provided in the command output. Th
 
 The front end was built with create-react-app and the backend is a Vercel serverless function.
 
-By default, when you run with `npx vercel dev`, your proxy requests will be made against localhost, where the UI is hosted. You can change this behavior (like when you may want to hit a different server) by setting the environment variable `REACT_APP_PROXY_DEV_DOMAIN` to wherever you want (such as the production environment: "https://slash-command-proxy.vercel.app"). This project uses `dotenv`, so you can create a .env file for this:
+By default, when you run with `npx vercel dev`, your proxy requests will be made against `localhost`, where the UI is hosted. You can change this behavior if you want to hit a different server by setting the environment variable `REACT_APP_PROXY_DEV_DOMAIN` to wherever you want (such as the production environment: https://slash-command-proxy.vercel.app). This project uses `dotenv`, so you can create a `.env` file for this:
 
 ```bash
 # .env
