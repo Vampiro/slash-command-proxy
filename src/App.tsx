@@ -28,25 +28,25 @@ function App() {
             <Toolbar classes={{ root: "nav-bar" }}>
               <Typography variant="h6" color="inherit">
                 <Link to="/">
-                  <img alt="Slash Command Proxy Logo" className="logo" src="/logo32.png"></img> Slash Command Proxy
+                  <img alt="Slash Command Proxy Logo" className="logo" src="/logo32.png" /> Slash Command Proxy
                 </Link>
               </Typography>
               <div className="right-nav">
                 <a href="https://github.com/vampiro/slash-command-proxy" rel="noopener noreferrer" target="_blank">
-                  <GitHubIcon></GitHubIcon>
+                  <GitHubIcon />
                 </a>
                 <Link to="/help">
-                  <HelpOutlineIcon></HelpOutlineIcon>
+                  <HelpOutlineIcon />
                 </Link>
               </div>
             </Toolbar>
           </AppBar>
           <div className="main-content">
             <Route exact path="/">
-              <CommandCreatorPage></CommandCreatorPage>
+              <CommandCreatorPage />
             </Route>
             <Route exact path="/help">
-              <UserDocsPage></UserDocsPage>
+              <UserDocsPage />
             </Route>
           </div>
         </div>

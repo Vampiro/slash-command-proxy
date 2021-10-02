@@ -32,7 +32,7 @@ function UserDocsPage() {
   return (
     <Grid className="UserDocsPage" container justify="center">
       <Grid item xs={12} md={11} lg={7}>
-        <div className="markdown-body" dangerouslySetInnerHTML={{ __html: docHtml }}></div>
+        <div className="markdown-body" dangerouslySetInnerHTML={{ __html: docHtml }} />
       </Grid>
     </Grid>
   );

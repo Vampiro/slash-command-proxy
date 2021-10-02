@@ -43,7 +43,7 @@ function CommandCreatorPage() {
               onDestUrlChange={handleDestUrlChange}
               onOutputTemplateChange={handleOutputTemplateChange}
               outputTemplate={outputTemplate}
-            ></CommandCreator>
+            />
           </CardContent>
         </Card>
         <Card className="command-test-wrapper">
@@ -53,14 +53,14 @@ function CommandCreatorPage() {
               destUrl={destUrl}
               onArgsChange={handleArgsChange}
               outputTemplate={outputTemplate}
-            ></CommandTest>
+            />
           </CardContent>
         </Card>
       </Grid>
       <Grid className="col" item xs={12} sm={4} md={4} lg={3}>
         <Card>
           <CardContent>
-            <ExampleList examples={examples} onExampleSelect={handleExampleSelect}></ExampleList>
+            <ExampleList examples={examples} onExampleSelect={handleExampleSelect} />
           </CardContent>
         </Card>
       </Grid>

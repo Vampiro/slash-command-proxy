@@ -48,7 +48,7 @@ function CommandCreator(props: CommandCreatorProps) {
         size="small"
         value={props.destUrl}
         variant="outlined"
-      ></TextField>
+      />
       <TextField
         fullWidth
         label="Output Template"
@@ -57,7 +57,7 @@ function CommandCreator(props: CommandCreatorProps) {
         size="small"
         value={props.outputTemplate}
         variant="outlined"
-      ></TextField>
+      />
       <div className="command-url-and-copy">
         <TextField
           className="command-url"
@@ -69,7 +69,7 @@ function CommandCreator(props: CommandCreatorProps) {
           size="small"
           value={createCommandUrl(props.destUrl, props.outputTemplate)}
           variant="outlined"
-        ></TextField>
+        />
         <div className="copy-wrapper">
           <Tooltip open={copyTooltipOpen} title="Command URL copied to clipboard">
             <Fab
