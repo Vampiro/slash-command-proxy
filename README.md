@@ -1,72 +1,40 @@
-# Slash Command Proxy<br/>[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Vampiro/slash-command-proxy/blob/master/LICENSE) [![CI](https://github.com/Vampiro/slash-command-proxy/workflows/CI/badge.svg)](https://github.com/Vampiro/slash-command-proxy/actions?query=workflow%3ACI)
+# Slash Command Proxy
 
 Proxies Slash Commands from [Slack](https://slack.com/) and [Mattermost](https://mattermost.com/) and formulates useful responses.
 
 ## Using the app
 
-Usage documentation is hosted in the [app](https://slash-command-proxy.herokuapp.com/help).
+Usage documentation is hosted within the app, [here](https://slash-command-proxy.vercel.app/help).
 
 ## Running the app
 
 ### Environment variables
 
-`PORT` (optional, runtime) You can change the port that the server will run on with this variable (default: 80). You can also change the port that the client will run on when in development mode with this variable. Don't set them to be the same.
+`REACT_APP_PROXY_DEV_DOMAIN` (development, build-time) When building the client, this variable will be used to make proxy requests/ build the Command URL when running with `npx vercel dev`.
 
-`REACT_APP_PROXY_DEV_DOMAIN` (development, build-time) When building the client, this variable will be used to make proxy requests/ build the Command URL when running with `npm start`.
-
-### Building & running the docker container
+### Building & running
 
 ```bash
-# to run locally
-docker build --tag test/slash-command-proxy .
-docker run --name slash-command-proxy -d -p 80:80 test/slash-command-proxy
-```
-
-### Building & running with nodejs
-
-#### Build the client code
-
-```javascript
-cd client
 npm install
-npm run build
+npx vercel dev
 ```
 
-#### Build & run the server code
+The app should now be running at the location provided in the command output. The api is served at `/api`.
 
-```javascript
-cd server
-npm install
-npm run build
-npm start
-```
+## Development
 
-The app should be running on localhost port 80 unless you specified another port in your `PORT` env.
+The front end was built with create-react-app and the backend is a Vercel serverless function.
 
-#### Development
-
-##### Client
-
-This was made with create-react-app and uses its basic scripts. `npm start` is sufficient to run the client on its own in a development mode.
-
-By default, when you run with `npm start`, your proxy requests will be made against http://slash-command-proxy.herokuapp.com. You can change this behavior (like if you want to test changes you've made to the server code) by setting the environment variable `REACT_APP_PROXY_DEV_DOMAIN` to wherever you want (like localhost). This project uses `dotenv`, so you can create a .env file for this:
+By default, when you run with `npx vercel dev`, your proxy requests will be made against localhost, where the UI is hosted. You can change this behavior (like when you may want to hit a different server) by setting the environment variable `REACT_APP_PROXY_DEV_DOMAIN` to wherever you want (such as the production environment: "https://slash-command-proxy.vercel.app"). This project uses `dotenv`, so you can create a .env file for this:
 
 ```bash
-# client/.env
-REACT_APP_PROXY_DEV_DOMAIN=http://localhost
+# .env
+REACT_APP_PROXY_DEV_DOMAIN=https://slash-command-proxy.vercel.app
 ```
 
-_Note: you must run `npm start` again after you change an environment variable._
+## Automatic deployment
 
-##### Server
-
-The server side depends on the client side already having been built with its artifacts in the `client/build` directory. To develop server code, you can run `npm run dev` which will run the server in a development mode.
-
-Documentation (TypeDoc) can be generated with `npm run docs`. Point your browser to `server/docs/index.html`.
-
-### Automatic deployment
-
-A [GitHub Action](.github/workflows/ci.yml) has been set up to deploy to Heroku with each change to the `master` branch.
+This application automatically deploys to Vercel on every push to the `master` branch.
 
 ## License
 
