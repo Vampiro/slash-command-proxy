@@ -28,7 +28,7 @@ marked.setOptions({
 // get the raw text of UserDocs.md, convert it to html with marked
 const docHtml = marked(raw("./UserDocs.md"));
 
-function UserDocsPage() {
+export function UserDocsPage() {
   return (
     <Grid className="UserDocsPage" container justify="center">
       <Grid item xs={12} md={11} lg={7}>
@@ -37,5 +37,3 @@ function UserDocsPage() {
     </Grid>
   );
 }
-
-export default UserDocsPage;

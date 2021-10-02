@@ -1,6 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
 
-export default [
+export const examples = [
   {
     title: "Cat facts",
     destUrl: "https://catfact.ninja/fact",

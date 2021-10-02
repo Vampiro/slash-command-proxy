@@ -1,12 +1,12 @@
 import { Card, CardContent, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import CommandCreator from "../components/CommandCreator";
-import CommandTest from "../components/CommandTest";
-import ExampleList from "../components/ExampleList";
-import examples from "../examples";
+import { CommandCreator } from "../components/CommandCreator";
+import { CommandTest } from "../components/CommandTest";
+import { ExampleList } from "../components/ExampleList";
+import { examples } from "../examples";
 import "./CommandCreatorPage.scss";
 
-function CommandCreatorPage() {
+export function CommandCreatorPage() {
   const [args, setArgs] = useState<string>("");
   const [outputTemplate, setOutputTemplate] = useState<string>("");
   const [destUrl, setDestUrl] = useState<string>("");
@@ -67,5 +67,3 @@ function CommandCreatorPage() {
     </Grid>
   );
 }
-
-export default CommandCreatorPage;

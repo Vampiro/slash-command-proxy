@@ -1,28 +1,22 @@
 import axios from "axios";
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import { ProxyResponse, VariableCollection } from "../src/server/types";
+import { ProxyResponse, RequestVariables, VariableCollection } from "../src/server/types";
 import { Reserved } from "../src/types";
 import { replaceVariables } from "../src/server/utils";
 
 export default async (req: VercelRequest, response: VercelResponse) => {
   console.log(`${new Date()} Received /proxy request.`);
 
-  const vc: VariableCollection = {
+  const reqVars: RequestVariables = {
     args: req.query.text ? (req.query.text as string).split(" ") : [],
     client: {
-      channel_id: req.query.channel_id as string,
       channel_name: req.query.channel_name as string,
       command: req.query.command as string,
       response_url: req.query.response_url as string,
-      team_domain: req.query.team_domain as string,
-      team_id: req.query.team_id as string,
       text: req.query.text as string,
-      token: req.query.token as string,
-      trigger_id: req.query.trigger_id as string,
       user_id: req.query.user_id as string,
       user_name: req.query.user_name as string,
     },
-    res: {},
   };
 
   let resJson: ProxyResponse = { text: "" };
@@ -41,26 +35,27 @@ export default async (req: VercelRequest, response: VercelResponse) => {
 
   if (req.query[`${Reserved.PROXY}.url`]) {
     // start out by replacing any variables within destination url (args)
-    const destUrl = replaceVariables(req.query[`${Reserved.PROXY}.url`] as string, vc);
+    const destUrl = replaceVariables(req.query[`${Reserved.PROXY}.url`] as string, reqVars);
 
     try {
       // send off request to destination server
       const extResponse = await axios.get(destUrl);
-      vc.res = extResponse.data;
+      const variableCollection: VariableCollection = reqVars;
+      variableCollection.res = extResponse.data;
 
       if (outputTemplate) {
         // try to replace any variables within output template (args, client, response)
         try {
-          setResponse(replaceVariables(outputTemplate, vc));
+          setResponse(replaceVariables(outputTemplate, variableCollection));
         } catch (error) {
           setResponse(`Encountered error while replacing variables: ${error}`, true);
         }
       } else {
         // no output template. check if string or object and set response appropriately
-        if (typeof vc.res === "string") {
-          setResponse(vc.res);
+        if (typeof variableCollection.res === "string") {
+          setResponse(variableCollection.res);
         } else {
-          setResponse(JSON.stringify(vc.res));
+          setResponse(JSON.stringify(variableCollection.res));
         }
       }
     } catch (error) {

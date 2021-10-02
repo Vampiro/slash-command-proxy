@@ -35,7 +35,7 @@ enum FormatType {
   Raw = "RAW",
 }
 
-function CommandTest(props: CommandTestProps) {
+export function CommandTest(props: CommandTestProps) {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const [formatType, setFormatType] = useState(FormatType.Markdown);
@@ -134,14 +134,14 @@ function CommandTest(props: CommandTestProps) {
           <ToggleButton aria-label="Markdown Format" value={FormatType.Markdown}>
             <Tooltip arrow placement="top" title="Markdown Formatting">
               <SvgIcon fontSize="small">
-                <path d={mdiFormatPilcrow}></path>
+                <path d={mdiFormatPilcrow} />
               </SvgIcon>
             </Tooltip>
           </ToggleButton>
           <ToggleButton aria-label="Raw Format" value={FormatType.Raw}>
             <Tooltip arrow placement="top" title="Raw Formatting">
               <SvgIcon fontSize="small">
-                <path d={mdiCodeTags}></path>
+                <path d={mdiCodeTags} />
               </SvgIcon>
             </Tooltip>
           </ToggleButton>
@@ -198,10 +198,8 @@ function CommandTest(props: CommandTestProps) {
           dangerouslySetInnerHTML={{
             __html: formatOutput(testResult.result),
           }}
-        ></div>
+        />
       )}
     </div>
   );
 }
-
-export default CommandTest;

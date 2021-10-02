@@ -7,15 +7,10 @@ import { VariableCollection } from "../../server/types";
 const variableCollection: VariableCollection = {
   args: ["20", "40", "60"],
   client: {
-    channel_id: "abc123",
     channel_name: "Town Hall",
     command: "roll",
     response_url: "https://google.com",
-    team_domain: "aaaaaaaa",
-    team_id: "bbbbbbb",
     text: "20",
-    token: "de3de3deqd",
-    trigger_id: "ffffff",
     user_id: "ppppppp",
     user_name: "tester",
   },

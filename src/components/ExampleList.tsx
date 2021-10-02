@@ -3,7 +3,7 @@ import React from "react";
 import { ExampleListProps } from "../types";
 import "./ExampleList.scss";
 
-function ExampleList(props: ExampleListProps) {
+export function ExampleList(props: ExampleListProps) {
   const handleExampleClick = (index: number) => {
     if (props.onExampleSelect) {
       props.onExampleSelect(
@@ -35,5 +35,3 @@ function ExampleList(props: ExampleListProps) {
     </div>
   );
 }
-
-export default ExampleList;

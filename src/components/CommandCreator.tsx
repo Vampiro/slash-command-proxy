@@ -6,7 +6,7 @@ import copyToClipboard from "copy-to-clipboard";
 import "./CommandCreator.scss";
 import { CommandCreatorProps } from "../types";
 
-function CommandCreator(props: CommandCreatorProps) {
+export function CommandCreator(props: CommandCreatorProps) {
   const [copyTooltipOpen, setCopyTooltipOpen] = useState(false);
 
   // handler for destination url text field
@@ -82,7 +82,7 @@ function CommandCreator(props: CommandCreatorProps) {
               size="small"
             >
               <SvgIcon>
-                <path d={mdiContentCopy}></path>
+                <path d={mdiContentCopy} />
               </SvgIcon>
             </Fab>
           </Tooltip>
@@ -91,5 +91,3 @@ function CommandCreator(props: CommandCreatorProps) {
     </div>
   );
 }
-
-export default CommandCreator;

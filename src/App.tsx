@@ -2,8 +2,8 @@ import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import CommandCreatorPage from "./pages/CommandCreatorPage";
-import UserDocsPage from "./pages/UserDocsPage";
+import { CommandCreatorPage } from "./pages/CommandCreatorPage";
+import { UserDocsPage } from "./pages/UserDocsPage";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import "./App.scss";
@@ -19,7 +19,7 @@ const theme = createMuiTheme({
   },
 });
 
-function App() {
+export function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <Router>
@@ -54,5 +54,3 @@ function App() {
     </MuiThemeProvider>
   );
 }
-
-export default App;
