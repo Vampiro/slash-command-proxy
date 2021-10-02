@@ -4,7 +4,7 @@ In both [Slack](https://slack.com/) and [Mattermost](https://mattermost.com/), y
 
 You: `/roll 20`
 
-Bot: "You rolled a 16!!!~!!"
+Bot: "You rolled a 16!"
 
 Behind the scenes, your command triggers a `GET` or `POST` to a **Command URL** you specify in advance along with any arguments you include in the command.
 
