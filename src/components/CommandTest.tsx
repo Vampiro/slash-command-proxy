@@ -106,6 +106,7 @@ function CommandTest(props: CommandTestProps) {
       );
       setTestResult(response.data.text);
     } catch (error) {
+      console.log(error);
       setTestResult(`An error occurred: ${error}`, timestamp);
     }
   };
