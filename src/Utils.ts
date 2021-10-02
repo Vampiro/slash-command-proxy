@@ -1,4 +1,4 @@
-let domain = "https://slash-command-proxy.herokuapp.com";
+let domain = "https://slash-command-proxy2.vercel.app";
 if (process.env.NODE_ENV === "development") {
   domain = process.env.REACT_APP_PROXY_DEV_DOMAIN || "http://localhost:3000";
 }
