@@ -4,7 +4,7 @@ Proxies Slash Commands from [Slack](https://slack.com/) and [Mattermost](https:/
 
 ## Using the app
 
-Usage documentation is hosted in the [app](https://slash-command-proxy.herokuapp.com/help).
+Usage documentation is hosted in the [app](https://slash-command-proxy.herokuapp.com/help). Trying our Vercel soon.
 
 ## Running the app
 
