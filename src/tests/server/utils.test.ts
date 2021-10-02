@@ -36,7 +36,7 @@ test("get variables", () => {
 
   expect(variables.length).toBe(5);
   expect(variables[0]).toBe("client.user_name");
-  expect(variables[1]).toBe("args[0]");
+  expect(variables[1]).toBe("aargs[0]");
   expect(variables[2]).toBe("args[1]");
   expect(variables[3]).toBe("res.rawr");
   expect(variables[4]).toBe("");
