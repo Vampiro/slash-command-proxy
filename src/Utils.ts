@@ -1,23 +1,16 @@
-let domain = "https://slash-command-proxy2.vercel.app";
-if (process.env.NODE_ENV === "development") {
-  domain = process.env.REACT_APP_PROXY_DEV_DOMAIN || "http://localhost:3000";
+let domain = window.location.origin;
+if (process.env.NODE_ENV === "development" && process.env.REACT_APP_PROXY_DEV_DOMAIN) {
+  domain = process.env.REACT_APP_PROXY_DEV_DOMAIN;
 }
 
 const proxyUrl = `${domain}/api/proxy`;
 
 export function createCommandUrl(destUrl: string, outputTemplate?: string) {
-  let outputParam =
-    outputTemplate === undefined
-      ? ""
-      : `&prx.output=${encodeURIComponent(outputTemplate)}`;
+  let outputParam = outputTemplate === undefined ? "" : `&prx.output=${encodeURIComponent(outputTemplate)}`;
   return `${proxyUrl}?prx.url=${encodeURIComponent(destUrl)}${outputParam}`;
 }
 
-export function createCommandUrlForTest(
-  destUrl: string,
-  outputTemplate?: string,
-  args: string = ""
-) {
+export function createCommandUrlForTest(destUrl: string, outputTemplate?: string, args: string = "") {
   const additionalFields: any = {
     channel_id: "the-channel-id",
     channel_name: "Super Channel",

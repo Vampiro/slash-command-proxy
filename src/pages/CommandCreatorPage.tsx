@@ -19,11 +19,7 @@ function CommandCreatorPage() {
     setArgs(args);
   };
 
-  const handleExampleSelect = (
-    destUrl: string,
-    outputTemplate: string,
-    args: string
-  ) => {
+  const handleExampleSelect = (destUrl: string, outputTemplate: string, args: string) => {
     setArgs(args);
     setOutputTemplate(outputTemplate);
     setDestUrl(destUrl);
@@ -64,10 +60,7 @@ function CommandCreatorPage() {
       <Grid className="col" item xs={12} sm={4} md={4} lg={3}>
         <Card>
           <CardContent>
-            <ExampleList
-              examples={examples}
-              onExampleSelect={handleExampleSelect}
-            ></ExampleList>
+            <ExampleList examples={examples} onExampleSelect={handleExampleSelect}></ExampleList>
           </CardContent>
         </Card>
       </Grid>

@@ -1,10 +1,4 @@
-import {
-  Fab,
-  SvgIcon,
-  TextField,
-  Tooltip,
-  Typography,
-} from "@material-ui/core";
+import { Fab, SvgIcon, TextField, Tooltip, Typography } from "@material-ui/core";
 import React, { ChangeEvent, useState } from "react";
 import { createCommandUrl } from "../Utils";
 import { mdiContentCopy } from "@mdi/js";
@@ -77,10 +71,7 @@ function CommandCreator(props: CommandCreatorProps) {
           variant="outlined"
         ></TextField>
         <div className="copy-wrapper">
-          <Tooltip
-            open={copyTooltipOpen}
-            title="Command URL copied to clipboard"
-          >
+          <Tooltip open={copyTooltipOpen} title="Command URL copied to clipboard">
             <Fab
               aria-label="Test"
               color="primary"

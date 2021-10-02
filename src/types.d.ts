@@ -21,9 +21,5 @@ type Example = {
 
 type ExampleListProps = {
   examples: Example[];
-  onExampleSelect?: (
-    destUrl: string,
-    outputTemplate: string,
-    args: string
-  ) => void;
+  onExampleSelect?: (destUrl: string, outputTemplate: string, args: string) => void;
 };

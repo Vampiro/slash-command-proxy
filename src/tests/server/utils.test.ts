@@ -1,9 +1,5 @@
 /* eslint-disable no-template-curly-in-string */
-import {
-  getVariables,
-  getVariableValue,
-  replaceVariables,
-} from "../../server/utils";
+import { getVariables, getVariableValue, replaceVariables } from "../../server/utils";
 import { VariableCollection } from "../../server/types";
 
 // to run a single test: npm test -- -t "get variables"
@@ -51,59 +47,34 @@ test("get variables", () => {
 });
 
 test("replacing variables", () => {
-  expect(
-    replaceVariables(
-      "Hello, ${client.user_name}, your answer is ${res.answer}.",
-      variableCollection
-    )
-  ).toBe("Hello, tester, your answer is 42.");
+  expect(replaceVariables("Hello, ${client.user_name}, your answer is ${res.answer}.", variableCollection)).toBe(
+    "Hello, tester, your answer is 42."
+  );
+
+  expect(replaceVariables("Hello, ${client.user_name12}, your answer is ${res.answer}.", variableCollection)).toBe(
+    "Hello, ${client.user_name12 is undefined}, your answer is 42."
+  );
 
   expect(
-    replaceVariables(
-      "Hello, ${client.user_name12}, your answer is ${res.answer}.",
-      variableCollection
-    )
-  ).toBe("Hello, ${client.user_name12 is undefined}, your answer is 42.");
-
-  expect(
-    replaceVariables(
-      "${res.result.abc[0]} ${client.user_name}, your answer is ${res.answer}.",
-      variableCollection
-    )
+    replaceVariables("${res.result.abc[0]} ${client.user_name}, your answer is ${res.answer}.", variableCollection)
   ).toBe("hello tester, your answer is 42.");
 
-  expect(
-    replaceVariables("Your first arg was ${args[0]}", variableCollection)
-  ).toBe("Your first arg was 20");
+  expect(replaceVariables("Your first arg was ${args[0]}", variableCollection)).toBe("Your first arg was 20");
 
-  expect(
-    replaceVariables(
-      'Args: ${args.map((arg) => `arg=${arg}`).join(" ")}',
-      variableCollection
-    )
-  ).toBe("Args: arg=20 arg=40 arg=60");
-
-  expect(replaceVariables("Rawr ${}", variableCollection)).toBe(
-    "Rawr ${ is undefined}"
+  expect(replaceVariables('Args: ${args.map((arg) => `arg=${arg}`).join(" ")}', variableCollection)).toBe(
+    "Args: arg=20 arg=40 arg=60"
   );
+
+  expect(replaceVariables("Rawr ${}", variableCollection)).toBe("Rawr ${ is undefined}");
 });
 
 test("get variable value", () => {
   expect(getVariableValue("args[0]", variableCollection)).toBe("20");
-  expect(getVariableValue("client.user_name", variableCollection)).toBe(
-    "tester"
-  );
-  expect(getVariableValue("res.result.abc[1]", variableCollection)).toBe(
-    "world"
-  );
-  expect(getVariableValue("args.join(' ')", variableCollection)).toBe(
-    "20 40 60"
-  );
+  expect(getVariableValue("client.user_name", variableCollection)).toBe("tester");
+  expect(getVariableValue("res.result.abc[1]", variableCollection)).toBe("world");
+  expect(getVariableValue("args.join(' ')", variableCollection)).toBe("20 40 60");
 
-  expect(
-    getVariableValue(
-      'args.map((arg) => `arg=${arg}`).join(" ")',
-      variableCollection
-    )
-  ).toBe("arg=20 arg=40 arg=60");
+  expect(getVariableValue('args.map((arg) => `arg=${arg}`).join(" ")', variableCollection)).toBe(
+    "arg=20 arg=40 arg=60"
+  );
 });
