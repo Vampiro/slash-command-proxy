@@ -3,7 +3,7 @@ import { VercelRequest, VercelResponse } from "@vercel/node";
 import { ProxyResponse, VariableCollection } from "../src/server/types";
 import { replaceVariables } from "../src/server/utils";
 
-export default async (req: VercelRequest, vResponse: VercelResponse) => {
+export default async (req: VercelRequest, response: VercelResponse) => {
   console.log(`${new Date()} Received /proxy request.`);
 
   const vc: VariableCollection = {
@@ -24,17 +24,17 @@ export default async (req: VercelRequest, vResponse: VercelResponse) => {
     res: {},
   };
 
-  let response: ProxyResponse = { text: "" };
+  let resJson: ProxyResponse = { text: "" };
   const outputTemplate = req.query["prx.output"] as string;
 
   // helper function to create the response.
   const setResponse = (text: string, isError = false) => {
-    response.text = text;
+    resJson.text = text;
 
     // if response_type is undefined, the text is only shown to the executor. if "in_channel", it is shown to all.
     // so if we're returning an error, just show it to the user (leave response_type undefined).
     if (!isError) {
-      response.response_type = "in_channel";
+      resJson.response_type = "in_channel";
     }
   };
 
@@ -72,5 +72,5 @@ export default async (req: VercelRequest, vResponse: VercelResponse) => {
     setResponse("Destination URL required", true);
   }
 
-  vResponse.status(200).json(response);
+  response.status(200).json(resJson);
 };
