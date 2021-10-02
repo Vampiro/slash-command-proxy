@@ -1,5 +1,6 @@
 import { List, ListItem, Typography } from "@material-ui/core";
 import React from "react";
+import { ExampleListProps } from "../types";
 import "./ExampleList.scss";
 
 function ExampleList(props: ExampleListProps) {

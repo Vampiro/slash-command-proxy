@@ -1,25 +1,29 @@
-type CommandCreatorProps = {
-  onOutputTemplateChange?: (outputTemplate: string) => void;
-  onDestUrlChange?: (destUrl: string) => void;
-  outputTemplate: string;
+export interface CommandCreatorProps {
   destUrl: string;
-};
+  onDestUrlChange?: (destUrl: string) => void;
+  onOutputTemplateChange?: (outputTemplate: string) => void;
+  outputTemplate: string;
+}
 
-type CommandTestProps = {
+export interface CommandTestProps {
   args: string;
+  destUrl: string;
   onArgsChange?: (args: string) => void;
   outputTemplate: string;
-  destUrl: string;
-};
+}
 
-type Example = {
+export interface Example {
   args: string;
   destUrl: string;
   outputTemplate: string;
   title: string;
-};
+}
 
-type ExampleListProps = {
+export interface ExampleListProps {
   examples: Example[];
   onExampleSelect?: (destUrl: string, outputTemplate: string, args: string) => void;
-};
+}
+
+export enum Reserved {
+  PROXY = "prx",
+}

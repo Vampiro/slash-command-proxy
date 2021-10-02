@@ -4,6 +4,7 @@ import { createCommandUrl } from "../Utils";
 import { mdiContentCopy } from "@mdi/js";
 import copyToClipboard from "copy-to-clipboard";
 import "./CommandCreator.scss";
+import { CommandCreatorProps } from "../types";
 
 function CommandCreator(props: CommandCreatorProps) {
   const [copyTooltipOpen, setCopyTooltipOpen] = useState(false);

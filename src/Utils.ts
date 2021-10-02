@@ -1,3 +1,5 @@
+import { Reserved } from "./types";
+
 let domain = window.location.origin;
 if (process.env.NODE_ENV === "development" && process.env.REACT_APP_PROXY_DEV_DOMAIN) {
   domain = process.env.REACT_APP_PROXY_DEV_DOMAIN;
@@ -6,8 +8,9 @@ if (process.env.NODE_ENV === "development" && process.env.REACT_APP_PROXY_DEV_DO
 const proxyUrl = `${domain}/api/proxy`;
 
 export function createCommandUrl(destUrl: string, outputTemplate?: string) {
-  let outputParam = outputTemplate === undefined ? "" : `&prx.output=${encodeURIComponent(outputTemplate)}`;
-  return `${proxyUrl}?prx.url=${encodeURIComponent(destUrl)}${outputParam}`;
+  let outputParam =
+    outputTemplate === undefined ? "" : `&${Reserved.PROXY}.output=${encodeURIComponent(outputTemplate)}`;
+  return `${proxyUrl}?${Reserved.PROXY}.url=${encodeURIComponent(destUrl)}${outputParam}`;
 }
 
 export function createCommandUrlForTest(destUrl: string, outputTemplate?: string, args: string = "") {

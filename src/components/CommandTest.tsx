@@ -13,6 +13,7 @@ import { mdiCodeTags, mdiFormatPilcrow } from "@mdi/js";
 import { makeStyles } from "@material-ui/core/styles";
 import "./CommandTest.scss";
 import "highlight.js/styles/github.css";
+import { CommandTestProps } from "../types";
 
 hljs.registerLanguage("json", json);
 

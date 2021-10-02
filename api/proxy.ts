@@ -1,6 +1,7 @@
 import axios from "axios";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import { ProxyResponse, VariableCollection } from "../src/server/types";
+import { Reserved } from "../src/types";
 import { replaceVariables } from "../src/server/utils";
 
 export default async (req: VercelRequest, response: VercelResponse) => {
@@ -25,7 +26,7 @@ export default async (req: VercelRequest, response: VercelResponse) => {
   };
 
   let resJson: ProxyResponse = { text: "" };
-  const outputTemplate = req.query["prx.output"] as string;
+  const outputTemplate = req.query[`${Reserved.PROXY}.output`] as string;
 
   // helper function to create the response.
   const setResponse = (text: string, isError = false) => {
@@ -38,9 +39,9 @@ export default async (req: VercelRequest, response: VercelResponse) => {
     }
   };
 
-  if (req.query["prx.url"]) {
+  if (req.query[`${Reserved.PROXY}.url`]) {
     // start out by replacing any variables within destination url (args)
-    const destUrl = replaceVariables(req.query["prx.url"] as string, vc);
+    const destUrl = replaceVariables(req.query[`${Reserved.PROXY}.url`] as string, vc);
 
     try {
       // send off request to destination server
@@ -52,10 +53,7 @@ export default async (req: VercelRequest, response: VercelResponse) => {
         try {
           setResponse(replaceVariables(outputTemplate, vc));
         } catch (error) {
-          setResponse(
-            `Encountered error while replacing variables: ${error}`,
-            true
-          );
+          setResponse(`Encountered error while replacing variables: ${error}`, true);
         }
       } else {
         // no output template. check if string or object and set response appropriately
