@@ -9,15 +9,15 @@ export const examples = [
   },
   {
     title: "Chuck Norris Facts",
-    destUrl: "http://api.icndb.com/jokes/random",
-    outputTemplate: "${res.value.joke}",
+    destUrl: "https://api.chucknorris.io/jokes/random",
+    outputTemplate: "${res.value}",
     args: "",
   },
   {
     title: "D&D 5e Spells",
     destUrl: 'https://www.dnd5eapi.co/api/spells/${args.join("-").toLowerCase()}',
     outputTemplate:
-      '### ${res.name}\n*Level ${res.level} ${res.school.name}*\n\n**Casting Time:** ${res["casting_time"]}\n\n**Range:** ${res.range}\n\n**Components**: ${res.components.length === 0 ? "*None*" : res.components.join(", ")}\n\n**Duration:** ${res.duration}\n\n**Classes:** ${res.classes ? res.classes.map((c) => c.name).join(", ") : ""}\n\n**Description:** ${res.desc ? res.desc.map((desc) => desc).join("\\n") : ""}\n\n${res["higher_level"] ? `**At Higher Levels:** ${res["higher_level"].join("\\n")}` : ""}',
+      '### ${res.name}\n*Level ${res.level} ${res.school.name}*\n\n**Casting Time:** ${res["casting_time"]}\n\n**Range:** ${res.range}\n\n**Components**: ${res.components.length === 0 ? "*None*" : res.components.join(", ")}\n\n**Duration:** ${res.duration}\n\n**Classes:** ${res.classes ? res.classes.map((c) => c.name).join(", ") : ""}\n\n**Description:** ${res.desc ? res.desc.map((desc) => desc).join("\\n") : ""}\n\n${res["higher_level"] && res["higher_level"].length !== 0 ? `**At Higher Levels:** ${res["higher_level"].join("\\n")}` : ""}',
     args: "Magic Missile",
   },
   {
@@ -35,8 +35,8 @@ export const examples = [
   },
   {
     title: "Magic 8-ball",
-    destUrl: "https://8ball.delegator.com/magic/JSON/Question",
-    outputTemplate: "${res.magic.answer}",
+    destUrl: "https://eightballapi.com/api?locale=en",
+    outputTemplate: "${resreading}",
     args: "",
   },
   {
@@ -53,8 +53,8 @@ export const examples = [
   },
   {
     title: "Random Cat",
-    destUrl: "https://aws.random.cat/meow",
-    outputTemplate: "![Cat Pic](${res.file})",
+    destUrl: "https://cataas.com/cat?json=true",
+    outputTemplate: "![Cat Pic](${res.url})",
     args: "",
   },
   {
